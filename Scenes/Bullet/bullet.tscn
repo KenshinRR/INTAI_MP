@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://bfkvw3o2633g6"]
 
-[ext_resource type="Texture2D" uid="uid://cfgwoxrvm8ma2" path="res://Bullet/bullet.png" id="1_584jf"]
-[ext_resource type="Script" path="res://Bullet/bullet.gd" id="1_peglh"]
-[ext_resource type="Script" path="res://Bullet/Trail.gd" id="3_dngta"]
+[ext_resource type="Texture2D" uid="uid://cfgwoxrvm8ma2" path="res://Scenes/Bullet/bullet.png" id="1_584jf"]
+[ext_resource type="Script" path="res://Scenes/Bullet/bullet.gd" id="1_peglh"]
+[ext_resource type="Script" path="res://Scenes/Bullet/Trail.gd" id="3_dngta"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8cv81"]
 size = Vector2(18, 6)

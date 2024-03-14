@@ -6,11 +6,11 @@ var direction = Vector2.ZERO
 	
 func _physics_process(delta):
 	if direction != Vector2.ZERO:
-		var velocity = direction * speed
+		var velocity = direction * speed * delta
 		global_position += velocity
 		
-func setDirection(direction):
-		self.direction = direction
+func setDirection(direction_param):
+		self.direction = direction_param
 		rotation += direction.angle()
 
 
@@ -23,5 +23,5 @@ func _on_display_timer_timeout():
 		#queue_free() 
 
 
-func _on_area_entered(area):
+func _on_area_entered(_area):
 	queue_free() 

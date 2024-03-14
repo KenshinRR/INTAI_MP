@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bdxg5l07uteoj"
-path="res://.godot/imported/pewpew.png-fb3613a0901e97a96b1a3b962411b2b4.ctex"
+uid="uid://biwcnppf7f260"
+path="res://.godot/imported/Basic Charakter Spritesheet.png-8e9a3267edcc455e27e5c52493371a0f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Player/Direction/pewpew.png"
-dest_files=["res://.godot/imported/pewpew.png-fb3613a0901e97a96b1a3b962411b2b4.ctex"]
+source_file="res://Scenes/Player/Direction/Basic Charakter Spritesheet.png"
+dest_files=["res://.godot/imported/Basic Charakter Spritesheet.png-8e9a3267edcc455e27e5c52493371a0f.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dynsli416akgu"
-path="res://.godot/imported/pewpew3.png-2edcf9848b7041b79523d2a39fa975d4.ctex"
+uid="uid://bdxg5l07uteoj"
+path="res://.godot/imported/pewpew.png-8c3be7cdafca15d7aae9541863288a46.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Player/Direction/pewpew3.png"
-dest_files=["res://.godot/imported/pewpew3.png-2edcf9848b7041b79523d2a39fa975d4.ctex"]
+source_file="res://Scenes/Player/Direction/pewpew.png"
+dest_files=["res://.godot/imported/pewpew.png-8c3be7cdafca15d7aae9541863288a46.ctex"]
 
 [params]
 

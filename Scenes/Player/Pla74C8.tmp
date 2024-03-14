@@ -1,12 +1,9 @@
-[gd_scene load_steps=25 format=3 uid="uid://51gkohx2lbt"]
+[gd_scene load_steps=24 format=3 uid="uid://51gkohx2lbt"]
 
-[ext_resource type="Texture2D" uid="uid://che6mvpwrrqut" path="res://Player/pewpew.png" id="1_qc4om"]
-[ext_resource type="PackedScene" uid="uid://bfkvw3o2633g6" path="res://Bullet/bullet.tscn" id="1_t2sbl"]
-[ext_resource type="Script" path="res://Player/Player.gd" id="1_tty4k"]
+[ext_resource type="Texture2D" uid="uid://che6mvpwrrqut" path="res://Scenes/Player/pewpew.png" id="1_qc4om"]
+[ext_resource type="Script" path="res://Scenes/Player/Player.gd" id="1_tty4k"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rlrg6"]
-radius = 24.0
-height = 48.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_xahvd"]
 
 [sub_resource type="Animation" id="Animation_02blr"]
 length = 0.001
@@ -173,16 +170,15 @@ graph_offset = Vector2(-12, -6)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_tty4k")
-Bullet = ExtResource("1_t2sbl")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(4, -2)
-scale = Vector2(0.379464, 0.39375)
+scale = Vector2(0.15, 0.156)
 texture = ExtResource("1_qc4om")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -1)
-shape = SubResource("CapsuleShape2D_rlrg6")
+shape = SubResource("CircleShape2D_xahvd")
 one_way_collision_margin = 0.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -200,7 +196,10 @@ parameters/Idle/blend_position = Vector2(0.2256, 0.576652)
 parameters/Walking/blend_position = Vector2(0.288, 0.470044)
 
 [node name="GunPoint" type="Marker2D" parent="."]
-position = Vector2(50, -7)
+position = Vector2(46, -4)
 
 [node name="GunDirection" type="Marker2D" parent="."]
-position = Vector2(52, -7)
+position = Vector2(48, -4)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(5, 5)
