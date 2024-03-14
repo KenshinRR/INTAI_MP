@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://begv0int516qh"]
+[gd_scene load_steps=9 format=3 uid="uid://begv0int516qh"]
 
 [ext_resource type="Texture2D" uid="uid://bnhsf3wai2y8h" path="res://View/Map/Room_Builder_free_16x16.png" id="1_oax6g"]
 [ext_resource type="Texture2D" uid="uid://i8hy6vsdnhld" path="res://View/Map/Interiors_free_16x16.png" id="2_iixnf"]
 [ext_resource type="PackedScene" uid="uid://bo7do035ysnp7" path="res://Scenes/Player/player.tscn" id="3_2bxsg"]
+[ext_resource type="PackedScene" uid="uid://bk1m1ungvuxh" path="res://Scenes/Buildings/power_up_spawner.tscn" id="4_uxkcd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t4u6y"]
 texture = ExtResource("1_oax6g")
@@ -1390,3 +1391,8 @@ layer_0/tile_data = PackedInt32Array(393224, 655360, 0, 458760, 655360, 1, 52429
 
 [node name="Player" parent="." instance=ExtResource("3_2bxsg")]
 position = Vector2(91, 186)
+
+[node name="Power Up Spawners" type="Node2D" parent="."]
+
+[node name="PowerUpSpawner" parent="Power Up Spawners" instance=ExtResource("4_uxkcd")]
+position = Vector2(33, 138)
