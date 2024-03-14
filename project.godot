@@ -17,7 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-GameVariables="*res://Model/Singletons/game_variables.gd"
+ScoreManager="*res://Controller/Managers/score_manager.gd"
 
 [display]
 

@@ -17,11 +17,11 @@ func _on_body_entered(body):
 	if(base_owner == "Enemy" && 
 	body.name == "Player" 
 	&& !is_destroyed):
-		GameVariables.player_score+= 1
+		ScoreManager.player_score+= 1
 		is_destroyed = true
 	elif (base_owner == "Player" && 
 	body.name == "Enemy" 
 	&& !is_destroyed):
-		GameVariables.enemy_score+= 1
+		ScoreManager.enemy_score+= 1
 		is_destroyed = true
 	pass # Replace with function body.
