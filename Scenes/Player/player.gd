@@ -53,7 +53,7 @@ func shootBullet():
 	var bullet_instance = Bullet.instantiate() 
 	var direction = gunDirec.global_position - gunPoint.global_position
 	emit_signal("bulletShoot", bullet_instance, gunPoint.global_position, direction)
-		
+	BulletManager.handleBulletSpawn(bullet_instance, gunPoint.global_position, direction)
 	
 #func _updateDirection(moveInput : Vector2): #updates the direction of the sprite
 	#if(moveInput != Vector2.ZERO):

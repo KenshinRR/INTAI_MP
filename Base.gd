@@ -15,7 +15,7 @@ func _process(_delta):
 
 func _on_body_entered(body):
 	if(base_owner == "Enemy" && 
-	body.name == "Player" 
+	body.name == "Player"
 	&& !is_destroyed):
 		ScoreManager.player_score+= 1
 		is_destroyed = true
