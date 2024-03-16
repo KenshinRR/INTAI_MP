@@ -24,9 +24,9 @@ func _physics_process(_delta): #handles movement
 	 		Input.get_action_strength("Move_Down") - Input.get_action_strength("Move_Up")).normalized()
 	
 	if(Input.get_action_strength("Shift")):
-		velocity = (direction * (MovementSpeed + 300) * _delta) 
+		velocity = (direction * (MovementSpeed + 3000) * _delta) 
 	else: 
-		velocity = (direction * MovementSpeed * _delta)	
+		velocity = (direction * MovementSpeed * _delta)
 		
 	move_and_slide()
 	
