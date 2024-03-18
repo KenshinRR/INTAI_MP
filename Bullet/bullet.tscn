@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://bfkvw3o2633g6"]
+
+[ext_resource type="Texture2D" uid="uid://cfgwoxrvm8ma2" path="res://Bullet/bullet.png" id="1_584jf"]
+[ext_resource type="Script" path="res://Bullet/bullet.gd" id="1_peglh"]
+[ext_resource type="Script" path="res://Bullet/Trail.gd" id="3_dngta"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8cv81"]
+size = Vector2(10, 3)
+
+[sub_resource type="Curve" id="Curve_7mcs2"]
+_data = [Vector2(0, 0), 0.0, 0.079869, 0, 0, Vector2(1, 0.105222), -0.0579412, 0.0, 0, 0]
+point_count = 2
+
+[node name="Bullet" type="Area2D"]
+position = Vector2(7, 0)
+script = ExtResource("1_peglh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-7, 0)
+scale = Vector2(0.222222, 0.357143)
+texture = ExtResource("1_584jf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-7, 0)
+shape = SubResource("RectangleShape2D_8cv81")
+
+[node name="Trail" type="Line2D" parent="."]
+width_curve = SubResource("Curve_7mcs2")
+default_color = Color(1, 0.870588, 0, 1)
+script = ExtResource("3_dngta")
+
+[node name="DisplayTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="DisplayTimer" to="." method="_on_display_timer_timeout"]
