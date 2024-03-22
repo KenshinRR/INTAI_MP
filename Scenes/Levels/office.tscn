@@ -4175,3 +4175,4 @@ position = Vector2(248, 22)
 base_owner = "Enemy"
 
 [node name="Player" parent="." instance=ExtResource("5_3sh5g")]
+position = Vector2(143, 226)

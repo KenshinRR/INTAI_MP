@@ -13,6 +13,7 @@ point_count = 2
 
 [node name="Bullet" type="Area2D"]
 position = Vector2(7, 0)
+scale = Vector2(0.5, 0.5)
 script = ExtResource("1_peglh")
 speed = 7
 
