@@ -1,12 +1,13 @@
-[gd_scene load_steps=27 format=3 uid="uid://51gkohx2lbt"]
+[gd_scene load_steps=27 format=3 uid="uid://dbjxfippv1hxw"]
 
-[ext_resource type="Texture2D" uid="uid://che6mvpwrrqut" path="res://Scenes/Player/pewpew.png" id="1_qc4om"]
-[ext_resource type="Script" path="res://Scenes/Player/Player.gd" id="1_tty4k"]
-[ext_resource type="Script" path="res://Scenes/Player/Weapon.gd" id="3_0l6mq"]
-[ext_resource type="PackedScene" uid="uid://bfkvw3o2633g6" path="res://Scenes/Bullet/bullet.tscn" id="4_epyci"]
-[ext_resource type="Script" path="res://Scenes/Health.gd" id="4_n4qah"]
+[ext_resource type="Script" path="res://Scenes/Enemies/Defensive Enemy/Defensive Enemy.gd" id="1_j1h6f"]
+[ext_resource type="Texture2D" uid="uid://che6mvpwrrqut" path="res://Scenes/Player/pewpew.png" id="2_16qxu"]
+[ext_resource type="Script" path="res://Scenes/Player/Weapon.gd" id="3_po5se"]
+[ext_resource type="PackedScene" uid="uid://bfkvw3o2633g6" path="res://Scenes/Bullet/bullet.tscn" id="4_it76a"]
+[ext_resource type="Script" path="res://Scenes/Health.gd" id="5_yb64o"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_xahvd"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_ahqvp"]
+radius = 11.0454
 
 [sub_resource type="Animation" id="Animation_02blr"]
 length = 0.001
@@ -163,7 +164,7 @@ blend_mode = 1
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nngs2"]
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_hnn8i"]
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_kvwty"]
 states/Idle/node = SubResource("AnimationNodeBlendSpace2D_hn5tp")
 states/Idle/position = Vector2(344, 29)
 states/Walking/node = SubResource("AnimationNodeBlendSpace2D_hcipb")
@@ -171,20 +172,18 @@ states/Walking/position = Vector2(461, 100)
 transitions = ["Start", "Walking", SubResource("AnimationNodeStateMachineTransition_nngs2")]
 graph_offset = Vector2(-12, -6)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Defensive AI" type="CharacterBody2D"]
 z_index = 2
-position = Vector2(-2, 1)
-collision_mask = 7
-script = ExtResource("1_tty4k")
+script = ExtResource("1_j1h6f")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(4, -2)
+position = Vector2(2, -1)
 scale = Vector2(0.15, 0.156)
-texture = ExtResource("1_qc4om")
+texture = ExtResource("2_16qxu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(2, -1)
-shape = SubResource("CircleShape2D_xahvd")
+position = Vector2(1, -1)
+shape = SubResource("CircleShape2D_ahqvp")
 one_way_collision_margin = 0.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -196,20 +195,20 @@ libraries = {
 libraries = {
 "": SubResource("AnimationLibrary_4yedo")
 }
-tree_root = SubResource("AnimationNodeStateMachine_hnn8i")
+tree_root = SubResource("AnimationNodeStateMachine_kvwty")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Idle/blend_position = Vector2(0.2256, 0.576652)
 parameters/Walking/blend_position = Vector2(0.288, 0.470044)
 
 [node name="Weapon" type="Node2D" parent="."]
-script = ExtResource("3_0l6mq")
-Bullet = ExtResource("4_epyci")
+script = ExtResource("3_po5se")
+Bullet = ExtResource("4_it76a")
 
 [node name="GunPoint" type="Marker2D" parent="Weapon"]
-position = Vector2(29, -4)
+position = Vector2(28, -3)
 
 [node name="GunDirection" type="Marker2D" parent="Weapon"]
-position = Vector2(31, -4)
+position = Vector2(30, -3)
 
 [node name="Health" type="Node" parent="."]
-script = ExtResource("4_n4qah")
+script = ExtResource("5_yb64o")
