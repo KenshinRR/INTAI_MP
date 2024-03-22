@@ -1,7 +1,7 @@
 extends Node2D
 
-@onready var BulletManager = $BulletManager
-@onready var player = $Agents/Player
+@onready var bullet_manager = $BulletManager
+@onready var player = $Player
 
 func _ready():
 	player.bulletShoot.connect(BulletManager.handleBulletSpawn)

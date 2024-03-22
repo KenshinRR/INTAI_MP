@@ -1,10 +1,10 @@
 [gd_scene load_steps=10 format=3 uid="uid://dw08sbn1uqgq0"]
 
-[ext_resource type="Script" path="res://main.gd" id="1_m6mcj"]
-[ext_resource type="Texture2D" uid="uid://bcwq7mx28qbwv" path="res://Floor/grid.png" id="1_serai"]
-[ext_resource type="PackedScene" uid="uid://51gkohx2lbt" path="res://Agents/Player/Player.tscn" id="2_4jdh1"]
+[ext_resource type="Script" path="res://Bullet/main.gd" id="1_m6mcj"]
+[ext_resource type="Texture2D" path="res://Floor/grid.png" id="1_serai"]
+[ext_resource type="PackedScene" uid="uid://51gkohx2lbt" path="res://Scenes/Player/player.tscn" id="2_4jdh1"]
 [ext_resource type="Script" path="res://Bullet/BulletManager.gd" id="3_qgoqe"]
-[ext_resource type="Texture2D" uid="uid://dtvw0b3tkdnyj" path="res://Floor/sheet.png" id="5_72s1j"]
+[ext_resource type="Texture2D" path="res://Floor/sheet.png" id="5_72s1j"]
 [ext_resource type="PackedScene" uid="uid://dq0ox03mjtd6g" path="res://Agents/Enemy/Enemy.tscn" id="6_qurof"]
 [ext_resource type="PackedScene" uid="uid://cu80ltyvncsy1" path="res://Objects/Chest.tscn" id="6_yfk0p"]
 

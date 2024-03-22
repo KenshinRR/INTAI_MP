@@ -1,7 +1,9 @@
-[gd_scene load_steps=24 format=3 uid="uid://51gkohx2lbt"]
+[gd_scene load_steps=26 format=3 uid="uid://51gkohx2lbt"]
 
 [ext_resource type="Texture2D" uid="uid://che6mvpwrrqut" path="res://Scenes/Player/pewpew.png" id="1_qc4om"]
 [ext_resource type="Script" path="res://Scenes/Player/Player.gd" id="1_tty4k"]
+[ext_resource type="Script" path="res://Scenes/Player/Weapon.gd" id="3_0l6mq"]
+[ext_resource type="PackedScene" uid="uid://bfkvw3o2633g6" path="res://Scenes/Bullet/bullet.tscn" id="4_epyci"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xahvd"]
 
@@ -195,11 +197,15 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/Idle/blend_position = Vector2(0.2256, 0.576652)
 parameters/Walking/blend_position = Vector2(0.288, 0.470044)
 
-[node name="GunPoint" type="Marker2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+
+[node name="Weapon" type="Node2D" parent="."]
+script = ExtResource("3_0l6mq")
+Bullet = ExtResource("4_epyci")
+
+[node name="GunPoint" type="Marker2D" parent="Weapon"]
 position = Vector2(46, -4)
 
-[node name="GunDirection" type="Marker2D" parent="."]
+[node name="GunDirection" type="Marker2D" parent="Weapon"]
 position = Vector2(48, -4)
-
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(5, 5)

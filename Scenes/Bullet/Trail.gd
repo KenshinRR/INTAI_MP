@@ -8,7 +8,6 @@ func _process(_delta):
 	global_rotation = 0 #set to 0 so no rotation will be applied
 	
 	point = get_parent().global_position #to follow the object
-	
 	add_point(point)
 	
 	while get_point_count() > length:
