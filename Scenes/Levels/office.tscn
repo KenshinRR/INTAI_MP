@@ -1,5 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://begv0int516qh"]
+[gd_scene load_steps=11 format=3 uid="uid://begv0int516qh"]
 
+[ext_resource type="Script" path="res://Scenes/Levels/office.gd" id="1_jrcvp"]
 [ext_resource type="Texture2D" uid="uid://bnhsf3wai2y8h" path="res://View/Map/Room_Builder_free_16x16.png" id="1_oax6g"]
 [ext_resource type="Texture2D" uid="uid://i8hy6vsdnhld" path="res://View/Map/Interiors_free_16x16.png" id="2_iixnf"]
 [ext_resource type="PackedScene" uid="uid://bk1m1ungvuxh" path="res://Scenes/Buildings/power_up_spawner.tscn" id="4_uxkcd"]
@@ -4133,6 +4134,7 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_w3l65")
 
 [node name="Office" type="Node2D"]
+script = ExtResource("1_jrcvp")
 
 [node name="Floor" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_43v8s")

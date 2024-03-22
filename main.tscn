@@ -1,0 +1,154 @@
+[gd_scene load_steps=10 format=3 uid="uid://dw08sbn1uqgq0"]
+
+[ext_resource type="Script" path="res://Bullet/main.gd" id="1_m6mcj"]
+[ext_resource type="Texture2D" path="res://Floor/grid.png" id="1_serai"]
+[ext_resource type="PackedScene" uid="uid://51gkohx2lbt" path="res://Scenes/Player/player.tscn" id="2_4jdh1"]
+[ext_resource type="Script" path="res://Bullet/BulletManager.gd" id="3_qgoqe"]
+[ext_resource type="Texture2D" path="res://Floor/sheet.png" id="5_72s1j"]
+[ext_resource type="PackedScene" uid="uid://dq0ox03mjtd6g" path="res://Agents/Enemy/Enemy.tscn" id="6_qurof"]
+[ext_resource type="PackedScene" uid="uid://cu80ltyvncsy1" path="res://Objects/Chest.tscn" id="6_yfk0p"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wjkng"]
+texture = ExtResource("5_72s1j")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+8:0/0 = 0
+9:0/0 = 0
+10:0/0 = 0
+11:0/0 = 0
+12:0/0 = 0
+13:0/0 = 0
+14:0/0 = 0
+15:0/0 = 0
+16:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+7:1/0 = 0
+8:1/0 = 0
+9:1/0 = 0
+10:1/0 = 0
+11:1/0 = 0
+12:1/0 = 0
+13:1/0 = 0
+14:1/0 = 0
+15:1/0 = 0
+16:1/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+7:2/0 = 0
+8:2/0 = 0
+9:2/0 = 0
+10:2/0 = 0
+11:2/0 = 0
+12:2/0 = 0
+13:2/0 = 0
+14:2/0 = 0
+15:2/0 = 0
+16:2/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+7:3/0 = 0
+8:3/0 = 0
+9:3/0 = 0
+10:3/0 = 0
+11:3/0 = 0
+12:3/0 = 0
+13:3/0 = 0
+14:3/0 = 0
+15:3/0 = 0
+16:3/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+7:4/0 = 0
+8:4/0 = 0
+9:4/0 = 0
+10:4/0 = 0
+11:4/0 = 0
+12:4/0 = 0
+13:4/0 = 0
+14:4/0 = 0
+15:4/0 = 0
+16:4/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+7:5/0 = 0
+8:5/0 = 0
+9:5/0 = 0
+10:5/0 = 0
+11:5/0 = 0
+12:5/0 = 0
+13:5/0 = 0
+14:5/0 = 0
+15:5/0 = 0
+16:5/0 = 0
+3:6/0 = 0
+4:6/0 = 0
+7:6/0 = 0
+8:6/0 = 0
+9:6/0 = 0
+10:6/0 = 0
+11:6/0 = 0
+12:6/0 = 0
+13:6/0 = 0
+14:6/0 = 0
+15:6/0 = 0
+16:6/0 = 0
+2:7/0 = 0
+3:7/0 = 0
+4:7/0 = 0
+5:7/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_fmv7w"]
+sources/0 = SubResource("TileSetAtlasSource_wjkng")
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_m6mcj")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+visible = false
+position = Vector2(902, 397)
+position_smoothing_enabled = true
+
+[node name="Background" type="TextureRect" parent="."]
+visible = false
+offset_right = 2313.0
+offset_bottom = 1261.0
+texture = ExtResource("1_serai")
+
+[node name="Floor" type="TileMap" parent="."]
+scale = Vector2(3, 3)
+tile_set = SubResource("TileSet_fmv7w")
+format = 2
+layer_0/tile_data = PackedInt32Array(327706, 720896, 1, 393242, 720896, 1, 458778, 720896, 1, 524314, 720896, 1, 589850, 720896, 1, 327704, 720896, 1, 327705, 720896, 1, 327703, 720896, 1, 327702, 720896, 1, 393238, 720896, 1, 458774, 720896, 1, 524310, 720896, 1, 589846, 720896, 1, 393239, 720896, 1, 458775, 720896, 1, 524311, 720896, 1, 589847, 720896, 1, 589848, 720896, 1, 524313, 720896, 1, 589849, 720896, 1, 458777, 720896, 1, 393241, 720896, 1, 393240, 720896, 1, 524312, 720896, 1, 458776, 720896, 1)
+
+[node name="BulletManager" type="Node2D" parent="."]
+script = ExtResource("3_qgoqe")
+
+[node name="Agents" type="Node2D" parent="."]
+
+[node name="Player" parent="Agents" instance=ExtResource("2_4jdh1")]
+position = Vector2(902, 397)
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Agents/Player"]
+remote_path = NodePath("../../../Camera2D")
+
+[node name="Enemy" parent="Agents" instance=ExtResource("6_qurof")]
+position = Vector2(1140, 294)
+rotation = 3.16428
+
+[node name="Objects" type="Node2D" parent="."]
+
+[node name="Chest" parent="Objects" instance=ExtResource("6_yfk0p")]
