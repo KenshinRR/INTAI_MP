@@ -12,7 +12,8 @@ var onHold = false
 var shootDelay = 0.1    #delay in seconds ADJUST IF NEEDED
 var time_since_last_shot = 0
 
-@onready var health = $Health
+var health = 10
+
 @onready var weapon = $Weapon
 
 func _ready(): #sets the initial direction the sprite is facing
@@ -23,10 +24,8 @@ func _physics_process(_delta): #handles movement
 	var direction = Vector2(Input.get_action_strength("Move_Right") - Input.get_action_strength("Move_Left"),
 	 		Input.get_action_strength("Move_Down") - Input.get_action_strength("Move_Up")).normalized()
 	
-	if(Input.get_action_strength("Shift")):
-		velocity = (direction * (MovementSpeed + 300)) 
-	else: 
-		velocity = (direction * MovementSpeed)	
+	
+	velocity = (direction * MovementSpeed)	
 		
 	move_and_slide()
 	
@@ -51,7 +50,7 @@ func shootBullet(bullet_instance, location, direction):
 	emit_signal("bulletShoot", bullet_instance, location, direction)
 		
 func handle_hit():
-	health.health -= 10	
+	health -= 10	
 #func _updateDirection(moveInput : Vector2): #updates the direction of the sprite
 	#if(moveInput != Vector2.ZERO):
 		#animation_tree.set("parameters/Walking/blend_position", moveInput)
