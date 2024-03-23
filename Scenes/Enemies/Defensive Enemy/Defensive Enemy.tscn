@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://Scenes/Health.gd" id="5_yb64o"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ahqvp"]
-radius = 11.0454
+radius = 8.0
 
 [sub_resource type="Animation" id="Animation_02blr"]
 length = 0.001
@@ -178,11 +178,11 @@ script = ExtResource("1_j1h6f")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(2, -1)
-scale = Vector2(0.15, 0.156)
+scale = Vector2(0.128, 0.133)
 texture = ExtResource("2_16qxu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, -1)
+position = Vector2(0, -1)
 shape = SubResource("CircleShape2D_ahqvp")
 one_way_collision_margin = 0.0
 
@@ -205,10 +205,10 @@ script = ExtResource("3_po5se")
 Bullet = ExtResource("4_it76a")
 
 [node name="GunPoint" type="Marker2D" parent="Weapon"]
-position = Vector2(28, -3)
+position = Vector2(23, -3)
 
 [node name="GunDirection" type="Marker2D" parent="Weapon"]
-position = Vector2(30, -3)
+position = Vector2(25, -3)
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("5_yb64o")

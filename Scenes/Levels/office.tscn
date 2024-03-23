@@ -4187,4 +4187,4 @@ zoom = Vector2(2.2, 2.2)
 position = Vector2(143, 226)
 
 [node name="Defensive AI" parent="." instance=ExtResource("7_efj5f")]
-position = Vector2(72, 48)
+position = Vector2(56, 57)
