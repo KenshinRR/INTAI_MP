@@ -9,7 +9,7 @@ signal bulletShoot(bullet, position, direction)
 var mousePosition = null
 var onHold = false
 
-var shootDelay = 0.1    #delay in seconds ADJUST IF NEEDED
+var shootDelay = 0.2   #delay in seconds ADJUST IF NEEDED
 var time_since_last_shot = 0
 
 var health = 10

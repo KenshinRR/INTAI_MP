@@ -173,6 +173,7 @@ transitions = ["Start", "Walking", SubResource("AnimationNodeStateMachineTransit
 graph_offset = Vector2(-12, -6)
 
 [node name="Defensive AI" type="CharacterBody2D"]
+modulate = Color(1, 0.301961, 1, 1)
 z_index = 2
 collision_layer = 2
 script = ExtResource("1_j1h6f")
