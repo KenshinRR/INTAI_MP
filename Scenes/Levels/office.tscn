@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bnhsf3wai2y8h" path="res://View/Map/Room_Builder_free_16x16.png" id="1_oax6g"]
 [ext_resource type="Texture2D" uid="uid://i8hy6vsdnhld" path="res://View/Map/Interiors_free_16x16.png" id="2_iixnf"]
 [ext_resource type="PackedScene" uid="uid://bk1m1ungvuxh" path="res://Scenes/Buildings/power_up_spawner.tscn" id="4_uxkcd"]
-[ext_resource type="PackedScene" uid="uid://51gkohx2lbt" path="res://Scenes/Player/player.tscn" id="5_3sh5g"]
+[ext_resource type="PackedScene" uid="uid://51gkohx2lbt" path="res://Scenes/Player/Player.tscn" id="5_3sh5g"]
 [ext_resource type="PackedScene" uid="uid://d08ci8qjjqp21" path="res://Scenes/Buildings/base.tscn" id="5_svojj"]
 [ext_resource type="PackedScene" uid="uid://dbjxfippv1hxw" path="res://Scenes/Enemies/Defensive Enemy/Defensive Enemy.tscn" id="7_efj5f"]
 
@@ -765,7 +765,8 @@ texture = ExtResource("1_oax6g")
 11:10/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSet" id="TileSet_43v8s"]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 4
+physics_layer_0/collision_mask = 0
 sources/1 = SubResource("TileSetAtlasSource_t4u6y")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w3l65"]
@@ -2479,9 +2480,11 @@ texture = ExtResource("2_iixnf")
 8:45/0 = 0
 8:45/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 8:45/0/physics_layer_0/angular_velocity = 0.0
+8:45/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 9:45/0 = 0
 9:45/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 9:45/0/physics_layer_0/angular_velocity = 0.0
+9:45/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 10:45/0 = 0
 10:45/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 10:45/0/physics_layer_0/angular_velocity = 0.0
@@ -4132,7 +4135,7 @@ texture = ExtResource("2_iixnf")
 
 [sub_resource type="TileSet" id="TileSet_7oue4"]
 physics_layer_0/collision_layer = 4
-physics_layer_0/collision_mask = 5
+physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_w3l65")
 
 [node name="Office" type="Node2D"]

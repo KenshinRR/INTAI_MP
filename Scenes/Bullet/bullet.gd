@@ -1,17 +1,17 @@
 extends Area2D
 
-@export var speed = 5
+@export var speed = 500
 
 var direction = Vector2.ZERO
 	
 func _physics_process(delta):
 	if direction != Vector2.ZERO:
-		var velocity = direction * speed
+		var velocity = direction * speed * delta
 		global_position += velocity
 		
-func setDirection(direction):
-		self.direction = direction
-		rotation += direction.angle()
+func setDirection(bullet_direction):
+		self.direction = bullet_direction
+		rotation += bullet_direction.angle()
 
 func _on_display_timer_timeout():
 	queue_free() 
@@ -21,5 +21,5 @@ func _on_body_entered(body):
 		body.handle_hit()
 		queue_free() 
 
-func _on_area_entered(area):
+func _on_area_entered(_area):
 	queue_free() 
