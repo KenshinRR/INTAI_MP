@@ -8,9 +8,12 @@ var shootDelay = 0.2
 signal bulletShoot(bullet, position, direction)
 
 #pathfinding
-@onready var tile_map = $"../Map"
+@onready var tile_map = $"../../Map"
 var astar_grid: AStarGrid2D
-@onready var player = $"../Player"
+@onready var player = $"../../Player"
+@onready var watchpoint = $"../Watchpoint"
+@onready var playerBaseNode = $"../../Bases/Player"
+var base_target : Array
 
 #movement
 var is_moving = false
@@ -28,6 +31,11 @@ func handle_hit():
 		spawn = true
 
 func _ready():
+	#setting up the base_target array
+	base_target.append(playerBaseNode.find_child("PlayerBase1"))
+	base_target.append(playerBaseNode.find_child("PlayerBase2"))
+	base_target.append(playerBaseNode.find_child("PlayerBase3"))
+	
 	#shooting
 	weapon.weaponFired.connect(self.shootBullet)
 	
@@ -70,10 +78,25 @@ func _process(_delta):
 	move()
 	
 func move():
+	#deciding where to go
+	var player_tile_data = tile_map.get_cell_tile_data(0, tile_map.local_to_map(player.global_position))
+	
+	var target
+	#setting target position
+	if player_tile_data.get_custom_data("Enemy Base"):
+		target = watchpoint.global_position
+	else:
+		target = player.global_position
+	
+	if player.isDead && _getAvailableBase() != null:
+		target = _getAvailableBase().global_position
+	
+	#getting path
 	var path = astar_grid.get_id_path(
 		tile_map.local_to_map(global_position),
-		tile_map.local_to_map(player.global_position)
+		tile_map.local_to_map(target)
 	)
+	
 	
 	path.pop_front()
 	
@@ -92,7 +115,8 @@ func _physics_process(delta):
 	move_and_slide()
 	is_moving = false
 	#shooting
-	isShooting(delta)
+	if !player.isDead:
+		isShooting(delta)
 
 func _on_timer_timeout():
 	pass # Replace with function body.
@@ -106,3 +130,8 @@ func isShooting(_delta):
 			
 func shootBullet(bullet_instance, location, direction):
 	emit_signal("bulletShoot", bullet_instance, location, direction)
+
+func _getAvailableBase():
+	for target in base_target:
+		if !target.is_destroyed:
+			return target

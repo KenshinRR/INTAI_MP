@@ -11,7 +11,8 @@ var onHold = false
 var shootDelay = 0.2   #delay in seconds ADJUST IF NEEDED
 var time_since_last_shot = 0
 
-var health = 10
+var health = 120
+var isDead = false
 
 @onready var weapon = $Weapon
 
@@ -24,8 +25,11 @@ func _physics_process(_delta): #handles movement
 	 		Input.get_action_strength("Move_Down") - Input.get_action_strength("Move_Up")).normalized()
 	
 	velocity = (direction * MovementSpeed)	
-		
+	
 	move_and_slide()
+	
+	if isDead:
+		handle_death()
 	
 func _process(_delta):  #mouse events
 	isShooting(_delta)
@@ -48,7 +52,10 @@ func shootBullet(bullet_instance, location, direction):
 	emit_signal("bulletShoot", bullet_instance, location, direction)
 		
 func handle_hit():
-	health -= 10	
-#func _updateDirection(moveInput : Vector2): #updates the direction of the sprite
-	#if(moveInput != Vector2.ZERO):
-		#animation_tree.set("parameters/Walking/blend_position", moveInput)
+	health -= 10
+	if health <= 0:
+		isDead = true
+
+func handle_death():
+	$Sprite2D.visible = false
+	return

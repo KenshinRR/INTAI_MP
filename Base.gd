@@ -20,8 +20,9 @@ func _on_body_entered(body):
 		ScoreManager.player_score+= 1
 		is_destroyed = true
 	elif (base_owner == "Player" && 
-	body.name == "Enemy" 
+	body.is_in_group("enemies")
 	&& !is_destroyed):
+		print("DESTROYED")
 		ScoreManager.enemy_score+= 1
 		is_destroyed = true
 	pass # Replace with function body.
