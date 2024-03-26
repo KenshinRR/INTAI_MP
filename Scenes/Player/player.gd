@@ -6,7 +6,6 @@ extends CharacterBody2D
 
 signal bulletShoot(bullet, position, direction)
 
-var mousePosition = null
 var onHold = false
 
 var shootDelay = 0.2   #delay in seconds ADJUST IF NEEDED
@@ -23,7 +22,6 @@ func _ready(): #sets the initial direction the sprite is facing
 func _physics_process(_delta): #handles movement
 	var direction = Vector2(Input.get_action_strength("Move_Right") - Input.get_action_strength("Move_Left"),
 	 		Input.get_action_strength("Move_Down") - Input.get_action_strength("Move_Up")).normalized()
-	
 	
 	velocity = (direction * MovementSpeed)	
 		
