@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dqdxamv6adjq8" path="res://View/Map/SandLight.png" id="1_7uxvo"]
 [ext_resource type="Script" path="res://Scenes/Levels/desert.gd" id="1_28qam"]
-[ext_resource type="PackedScene" uid="uid://51gkohx2lbt" path="res://Scenes/Player/Player.tscn" id="2_45skv"]
+[ext_resource type="PackedScene" uid="uid://51gkohx2lbt" path="res://Scenes/Player/player.tscn" id="2_45skv"]
 [ext_resource type="PackedScene" uid="uid://bedx1tiharrag" path="res://Scenes/Enemies/Smart Enemy/smart_enemy.tscn" id="3_oohhb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ujegn"]

@@ -4205,6 +4205,7 @@ zoom = Vector2(2.2, 2.2)
 position = Vector2(143, 226)
 
 [node name="Smart Enemy" parent="." instance=ExtResource("7_3usb7")]
-position = Vector2(60, 73)
+position = Vector2(64, 48)
 
 [node name="Defensive AI" parent="." instance=ExtResource("7_efj5f")]
+position = Vector2(-72, 8)

@@ -13,7 +13,7 @@ var targetPosition = Vector2.ZERO
 var AStarGrid: AStarGrid2D
 
 func handle_hit():
-	health.health -= 0
+	health.health -= 10
 	if health.health <= 0:
 		queue_free()
 		spawn = true

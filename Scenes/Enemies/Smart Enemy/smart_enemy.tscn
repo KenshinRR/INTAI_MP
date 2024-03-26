@@ -42,4 +42,7 @@ position = Vector2(25, -3)
 wait_time = 0.1
 autostart = true
 
+[node name="LineOfSight" type="RayCast2D" parent="."]
+collision_mask = 4
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

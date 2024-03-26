@@ -1,5 +1,12 @@
 extends CharacterBody2D
 
+#aiming and shooting
+@onready var raycast = $LineOfSight
+var time_since_last_shot = 0
+var shootDelay = 0.2 
+@onready var weapon = $Weapon
+signal bulletShoot(bullet, position, direction)
+
 #pathfinding
 @onready var tile_map = $"../Map"
 var astar_grid: AStarGrid2D
@@ -21,6 +28,10 @@ func handle_hit():
 		spawn = true
 
 func _ready():
+	#shooting
+	weapon.weaponFired.connect(self.shootBullet)
+	
+	#preparing the A* tilemap
 	astar_grid = AStarGrid2D.new()
 	astar_grid.region = tile_map.get_used_rect()
 	astar_grid.cell_size = Vector2(16,16)
@@ -51,6 +62,8 @@ func _ready():
 				astar_grid.set_point_solid(tile_position)
 				
 func _process(_delta):
+	raycast.target_position = to_local(player.global_position)
+	look_at(player.global_position)
 	if is_moving:
 		return
 		
@@ -65,26 +78,31 @@ func move():
 	path.pop_front()
 	
 	if path.is_empty():
-		print("No path")
+		#print("No path")
 		return
-		
-	#var original_position = Vector2(global_position)
-	
-	#global_position = tile_map.map_to_local(path[0])
-	#global_position.move_toward(tile_map.map_to_local(path[0]), 1)
 	
 	target_position = tile_map.map_to_local(path[0])
-	
-	#velocity = path[0].direction * MovementSpeed
 	
 	is_moving = true
 	
 func _physics_process(delta):
+	#movement
 	var direction = target_position - global_position
-	#global_position.move_toward(target_position, MovementSpeed * delta)
 	velocity = direction * MovementSpeed * delta
 	move_and_slide()
 	is_moving = false
+	#shooting
+	isShooting(delta)
 
 func _on_timer_timeout():
 	pass # Replace with function body.
+
+func isShooting(_delta):
+	if !raycast.is_colliding():
+		time_since_last_shot += _delta
+		if time_since_last_shot >= shootDelay:	#makes sure to not shoot bullets instantly
+			weapon.shootBullet()
+			time_since_last_shot = 0
+			
+func shootBullet(bullet_instance, location, direction):
+	emit_signal("bulletShoot", bullet_instance, location, direction)
