@@ -3,7 +3,7 @@ extends CharacterBody2D
 #aiming and shooting
 @onready var raycast = $LineOfSight
 var time_since_last_shot = 0
-var shootDelay = 0.2 
+var shootDelay = 2 
 @onready var weapon = $Weapon
 signal bulletShoot(bullet, position, direction)
 
