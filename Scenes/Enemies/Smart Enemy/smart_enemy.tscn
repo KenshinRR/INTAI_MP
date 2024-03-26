@@ -37,3 +37,9 @@ position = Vector2(23, -3)
 
 [node name="GunDirection" type="Marker2D" parent="Weapon"]
 position = Vector2(25, -3)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
