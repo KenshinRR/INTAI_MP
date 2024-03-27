@@ -2,8 +2,6 @@ extends CharacterBody2D
 @export var MovementSpeed = 50.0
 @export var startDirection = Vector2(0,1)
 
-#@onready var animation_tree = $AnimationTree
-
 signal bulletShoot(bullet, position, direction)
 
 var onHold = false

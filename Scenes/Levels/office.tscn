@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://begv0int516qh"]
+[gd_scene load_steps=12 format=3 uid="uid://begv0int516qh"]
 
 [ext_resource type="Script" path="res://Scenes/Levels/office.gd" id="1_jrcvp"]
 [ext_resource type="Texture2D" uid="uid://bnhsf3wai2y8h" path="res://View/Map/Room_Builder_free_16x16.png" id="1_oax6g"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bk1m1ungvuxh" path="res://Scenes/Buildings/power_up_spawner.tscn" id="4_uxkcd"]
 [ext_resource type="PackedScene" uid="uid://51gkohx2lbt" path="res://Scenes/Player/player.tscn" id="5_3sh5g"]
 [ext_resource type="PackedScene" uid="uid://d08ci8qjjqp21" path="res://Scenes/Buildings/base.tscn" id="5_svojj"]
+[ext_resource type="PackedScene" uid="uid://dbjxfippv1hxw" path="res://Scenes/Enemies/Defensive Enemy/Defensive Enemy.tscn" id="7_2srjw"]
 [ext_resource type="PackedScene" uid="uid://bedx1tiharrag" path="res://Scenes/Enemies/Smart Enemy/smart_enemy.tscn" id="7_3usb7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rairw"]
@@ -4229,10 +4230,11 @@ zoom = Vector2(2.2, 2.2)
 [node name="Player" parent="." instance=ExtResource("5_3sh5g")]
 position = Vector2(272, 200)
 
-[node name="Enemy" type="Node2D" parent="."]
+[node name="Defensive AI" parent="." instance=ExtResource("7_2srjw")]
+position = Vector2(8, 8)
 
-[node name="Smart Enemy" parent="Enemy" instance=ExtResource("7_3usb7")]
+[node name="Smart Enemy" parent="." instance=ExtResource("7_3usb7")]
 position = Vector2(24, 40)
 
-[node name="Watchpoint" type="Marker2D" parent="Enemy"]
+[node name="Watchpoint" type="Marker2D" parent="Smart Enemy"]
 position = Vector2(152, 64)

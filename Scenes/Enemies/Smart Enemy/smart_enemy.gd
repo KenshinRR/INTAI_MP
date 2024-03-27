@@ -8,11 +8,11 @@ var shootDelay = 2
 signal bulletShoot(bullet, position, direction)
 
 #pathfinding
-@onready var tile_map = $"../../Map"
+@onready var tile_map = $"../Map"
 var astar_grid: AStarGrid2D
-@onready var player = $"../../Player"
-@onready var watchpoint = $"../Watchpoint"
-@onready var playerBaseNode = $"../../Bases/Player"
+@onready var player = $"../Player"
+@onready var watchpoint = $Watchpoint
+@onready var playerBaseNode = $"../Bases/Player"
 var base_target : Array
 
 #movement
