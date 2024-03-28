@@ -22,6 +22,8 @@ var target_position = Vector2.ZERO
 #heath
 @onready var health = $Health
 var spawn = false
+var isDead = false
+var deadLocation
 
 func handle_hit():
 	health.health -= 10
@@ -35,6 +37,7 @@ func _ready():
 	watchpoint = get_tree().get_first_node_in_group("Watchpoint")
 	player = get_tree().get_first_node_in_group("Player")
 	tile_map = get_tree().get_first_node_in_group("Map")
+	deadLocation = get_tree().get_nodes_in_group("Respawn Locations")[1]
 	
 	#shooting
 	weapon.weaponFired.connect(self.shootBullet)
@@ -75,7 +78,10 @@ func _process(_delta):
 	if is_moving:
 		return
 		
-	move()
+	if !isDead:
+		move()
+		
+	
 	
 func move():
 	#deciding where to go
@@ -134,3 +140,6 @@ func _getAvailableBase():
 	for target in base_target:
 		if !target.is_destroyed:
 			return target
+
+func handle_death():
+	pass

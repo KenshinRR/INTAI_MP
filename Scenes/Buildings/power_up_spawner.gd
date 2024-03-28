@@ -42,7 +42,7 @@ func _on_timer_timeout():
 	is_spawned = true
 	var valid = false
 	var region_size = astar_grid.region.size
-	var generated_pos : Vector2
+	var generated_pos = Vector2(0,0)
 	
 	power_up = power_up_scene.instantiate()
 	get_tree().root.add_child(power_up)
@@ -63,5 +63,4 @@ func _on_timer_timeout():
 		valid = true
 		
 	power_up.global_position = tile_map.map_to_local(generated_pos)
-	
 	pass # Replace with function body.
