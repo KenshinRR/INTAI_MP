@@ -23,7 +23,12 @@ var target_position = Vector2.ZERO
 @onready var health = $Health
 var spawn = false
 var isDead = false
+var time_since_died = 0
+var respawn_time = 5
 var deadLocation
+var FirstSpawn = false
+var Spawner : int
+var SpawnLocation
 
 func handle_hit():
 	health.health -= 10
@@ -34,12 +39,18 @@ func handle_hit():
 
 func _ready():
 	#setting up the variables
+	if FirstSpawn:
+		Spawner = randi_range(3,5)
+		FirstSpawn = false
+	
+	SpawnLocation = get_tree().get_nodes_in_group("Spawn Locations")[Spawner]
 	base_target = get_tree().get_nodes_in_group("Player Bases")
 	watchpoint = get_tree().get_first_node_in_group("Watchpoint")
 	player = get_tree().get_first_node_in_group("Player")
 	tile_map = get_tree().get_first_node_in_group("Map")
 	deadLocation = get_tree().get_nodes_in_group("Respawn Locations")[1]
 	
+	global_position = SpawnLocation.global_position
 	#shooting
 	weapon.weaponFired.connect(self.shootBullet)
 	
@@ -83,6 +94,12 @@ func _process(_delta):
 		handle_death()
 	else:
 		move()
+		
+	if isDead:
+		time_since_died += _delta
+	
+	if isDead and time_since_died >= respawn_time:
+		handle_respawn()
 	
 	
 func move():
@@ -91,13 +108,16 @@ func move():
 	
 	var target
 	#setting target position
-	if player_tile_data.get_custom_data("Enemy Base"):
-		target = watchpoint.global_position
-	else:
-		target = player.global_position
-	
-	if player.isDead && _getAvailableBase() != null:
+	if player.isDead == true && _getAvailableBase() != null:
 		target = _getAvailableBase().global_position
+	
+	if player.isDead == false:
+		if player_tile_data.get_custom_data("Enemy Base"):
+			target = watchpoint.global_position
+		else:
+			target = player.global_position
+	
+
 	
 	#getting path
 	var path = astar_grid.get_id_path(
@@ -143,6 +163,11 @@ func _getAvailableBase():
 		if !target.is_destroyed:
 			return target
 
+func handle_respawn():
+	global_position = SpawnLocation.global_position
+	isDead = false
+	time_since_died = 0
+	
 func handle_death():
 	global_position = deadLocation.global_position
 	pass

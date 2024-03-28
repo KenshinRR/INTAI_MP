@@ -2,14 +2,19 @@ extends CharacterBody2D
 
 signal bulletShoot(bullet, position, direction)
 
-var health
-var spawn = false
-
+@onready var health = $Health
 var player
 var vision_pro_max
 var isMoving = false
 var MovementSpeed = 50
 var targetPosition = Vector2.ZERO
+var isDead = false
+var time_since_died = 0
+var respawn_time = 5
+var deadLocation
+var FirstSpawn = false
+var Spawner : int
+var SpawnLocation
 
 var shootDelay = 1.5  #delay in seconds ADJUST IF NEEDED
 var time_since_last_shot = 0
@@ -21,13 +26,19 @@ func handle_hit():
 	health.health -= 10
 	if health.health <= 0:
 		queue_free()
-		spawn = true
 
 func _ready():
-	health = get_tree().get_first_node_in_group("Health")
+	if FirstSpawn:
+		Spawner = randi_range(3,5)
+		FirstSpawn = false
+	
+	SpawnLocation = get_tree().get_nodes_in_group("Spawn Locations")[Spawner]
+	deadLocation = get_tree().get_nodes_in_group("Respawn Locations")[1]
 	player = get_tree().get_first_node_in_group("Player")
 	vision_pro_max = get_tree().get_first_node_in_group("Vision ProMax")
 	tile_map = get_tree().get_first_node_in_group("Map")
+	
+	global_position = SpawnLocation.global_position
 	
 	AStarGrid = AStarGrid2D.new()
 	AStarGrid.region = tile_map.get_used_rect()
@@ -60,11 +71,18 @@ func _ready():
 				
 func _process(_delta):
 	
-	
+
 	if isMoving:
-		return
-		
-	move()
+		return	
+	if isDead:
+		handle_death()
+		time_since_died += _delta
+	elif isDead and time_since_died >= respawn_time:
+		handle_respawn()
+	else:
+		move()
+	
+
 	
 func move():
 	var path = AStarGrid.get_id_path(
@@ -91,4 +109,13 @@ func _physics_process(_delta):
 		velocity = Vector2.ZERO
 	
 	isMoving = false
+	
+func handle_respawn():
+	global_position = SpawnLocation.global_position
+	isDead = false
+	time_since_died = 0
+	
+func handle_death():
+	global_position = deadLocation.global_position
+	pass
 
