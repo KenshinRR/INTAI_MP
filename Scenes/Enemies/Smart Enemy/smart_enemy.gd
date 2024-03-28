@@ -8,17 +8,10 @@ var shootDelay = 2
 signal bulletShoot(bullet, position, direction)
 
 #pathfinding
-@onready var tile_map = $"../../Map"
+var tile_map
 var astar_grid: AStarGrid2D
-<<<<<<< Updated upstream
-@onready var player = $"../Player"
-@onready var watchpoint = $Watchpoint
-@onready var playerBaseNode = $"../Bases/Player"
-=======
-@onready var player = $"../../Player"
-@onready var watchpoint = $"../Watchpoint"
-@onready var playerBaseNode = $"../../Bases/Player"
->>>>>>> Stashed changes
+var player
+var watchpoint
 var base_target : Array
 
 #movement
@@ -37,10 +30,11 @@ func handle_hit():
 		spawn = true
 
 func _ready():
-	#setting up the base_target array
-	base_target.append(playerBaseNode.find_child("PlayerBase1"))
-	base_target.append(playerBaseNode.find_child("PlayerBase2"))
-	base_target.append(playerBaseNode.find_child("PlayerBase3"))
+	#setting up the variables
+	base_target = get_tree().get_nodes_in_group("Player Bases")
+	watchpoint = get_tree().get_first_node_in_group("Watchpoint")
+	player = get_tree().get_first_node_in_group("Player")
+	tile_map = get_tree().get_first_node_in_group("Map")
 	
 	#shooting
 	weapon.weaponFired.connect(self.shootBullet)

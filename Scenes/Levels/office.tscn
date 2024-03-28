@@ -1,12 +1,31 @@
 [gd_scene load_steps=11 format=3 uid="uid://begv0int516qh"]
 
-[ext_resource type="Script" path="res://Scenes/Levels/office.gd" id="1_jrcvp"]
 [ext_resource type="Texture2D" uid="uid://bnhsf3wai2y8h" path="res://View/Map/Room_Builder_free_16x16.png" id="1_oax6g"]
 [ext_resource type="Texture2D" uid="uid://i8hy6vsdnhld" path="res://View/Map/Interiors_free_16x16.png" id="2_iixnf"]
-[ext_resource type="PackedScene" uid="uid://bk1m1ungvuxh" path="res://Scenes/Buildings/power_up_spawner.tscn" id="4_uxkcd"]
+[ext_resource type="PackedScene" uid="uid://bk1m1ungvuxh" path="res://power_up_spawner.tscn" id="4_uxkcd"]
 [ext_resource type="PackedScene" uid="uid://51gkohx2lbt" path="res://Scenes/Player/player.tscn" id="5_3sh5g"]
 [ext_resource type="PackedScene" uid="uid://d08ci8qjjqp21" path="res://Scenes/Buildings/base.tscn" id="5_svojj"]
 [ext_resource type="PackedScene" uid="uid://bedx1tiharrag" path="res://Scenes/Enemies/Smart Enemy/smart_enemy.tscn" id="7_3usb7"]
+
+[sub_resource type="GDScript" id="GDScript_fmqis"]
+script/source = "extends Node2D
+
+@onready var player = $Player
+@onready var enemy = $\"Enemy/Smart Enemy\"
+@onready var bullet_manager = \"res://Scenes/Bullet/BulletManager.gd\"
+@export var power_up_scene: PackedScene
+
+func _ready():
+	$PrepTimer.start()
+	player.bulletShoot.connect(BulletManager.handleBulletSpawn)
+	enemy.bulletShoot.connect(BulletManager.handleBulletSpawn)
+
+
+func _on_prep_timer_timeout():
+	$Message.hide()
+	$MessageBox.hide()
+	pass # Replace with function body.
+"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rairw"]
 texture = ExtResource("2_iixnf")
@@ -4167,7 +4186,7 @@ sources/1 = SubResource("TileSetAtlasSource_t4u6y")
 sources/0 = SubResource("TileSetAtlasSource_rairw")
 
 [node name="Office" type="Node2D"]
-script = ExtResource("1_jrcvp")
+script = SubResource("GDScript_fmqis")
 
 [node name="PlayerStatBox" type="ColorRect" parent="."]
 offset_left = 325.0
@@ -4176,7 +4195,7 @@ offset_right = 448.0
 offset_bottom = 266.0
 color = Color(0.219608, 0.2, 1, 0.827451)
 
-[node name="Map" type="TileMap" parent="."]
+[node name="Map" type="TileMap" parent="." groups=["Map"]]
 tile_set = SubResource("TileSet_43v8s")
 format = 2
 layer_0/name = "Floor"
@@ -4207,15 +4226,15 @@ base_owner = "Enemy"
 
 [node name="Player" type="Node2D" parent="Bases"]
 
-[node name="PlayerBase1" parent="Bases/Player" instance=ExtResource("5_svojj")]
+[node name="PlayerBase1" parent="Bases/Player" groups=["Player Bases"] instance=ExtResource("5_svojj")]
 position = Vector2(56, 248)
 base_owner = "Player"
 
-[node name="PlayerBase2" parent="Bases/Player" instance=ExtResource("5_svojj")]
+[node name="PlayerBase2" parent="Bases/Player" groups=["Player Bases"] instance=ExtResource("5_svojj")]
 position = Vector2(152, 248)
 base_owner = "Player"
 
-[node name="PlayerBase3" parent="Bases/Player" instance=ExtResource("5_svojj")]
+[node name="PlayerBase3" parent="Bases/Player" groups=["Player Bases"] instance=ExtResource("5_svojj")]
 position = Vector2(248, 248)
 base_owner = "Player"
 
@@ -4224,22 +4243,15 @@ position = Vector2(153, 134)
 scale = Vector2(0.857777, 1.34557)
 zoom = Vector2(2.2, 2.2)
 
-[node name="Player" parent="." instance=ExtResource("5_3sh5g")]
+[node name="Player" parent="." groups=["Player"] instance=ExtResource("5_3sh5g")]
 position = Vector2(272, 200)
 
 [node name="Enemy" type="Node2D" parent="."]
 
-<<<<<<< Updated upstream
-[node name="Smart Enemy" parent="." instance=ExtResource("7_3usb7")]
-position = Vector2(24, 40)
-
-[node name="Watchpoint" type="Marker2D" parent="Smart Enemy"]
-position = Vector2(152, 64)
-=======
 [node name="Smart Enemy" parent="Enemy" instance=ExtResource("7_3usb7")]
 position = Vector2(24, 40)
 
-[node name="Watchpoint" type="Marker2D" parent="Enemy"]
+[node name="Watchpoint" type="Marker2D" parent="Enemy" groups=["Watchpoint"]]
 position = Vector2(152, 64)
 
 [node name="PrepTimer" type="Timer" parent="."]
@@ -4272,4 +4284,3 @@ offset_bottom = 88.0
 color = Color(1, 0.2, 0.121569, 0.827451)
 
 [connection signal="timeout" from="PrepTimer" to="." method="_on_prep_timer_timeout"]
->>>>>>> Stashed changes
