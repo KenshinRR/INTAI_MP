@@ -29,6 +29,9 @@ var FirstSpawn = false
 var Spawner : int
 var SpawnLocation
 
+#powerup
+signal invi
+
 func handle_hit():
 	health.health -= 10
 	if health.health <= 0:
@@ -169,5 +172,12 @@ func handle_death():
 	pass
 	
 func power_handle(rando):
-	print("touched")
-	pass
+	if rando == 0:
+		print("chaos")
+	if rando == 1:
+		emit_signal("invi")
+	
+	if rando == 2:
+		health.health = 0
+		isDead = true
+		print("mines")

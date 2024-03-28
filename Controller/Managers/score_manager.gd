@@ -15,4 +15,17 @@ func _ready():
 func _process(_delta):
 	if player_score >= 3:
 		print("Player Wins!")
+		handleWin()
+	elif enemy_score >= 3:
+		print("Enemy Wins!")
+		handleWin()
 	pass
+
+func handleWin():
+	get_tree().change_scene_to_file("res://Scenes/Levels/title_screen.tscn")
+
+func resetValues():
+	player_score = 0
+	enemy_score = 0
+	player_kills = 0
+	enemy_kills = 0
