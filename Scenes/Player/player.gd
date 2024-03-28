@@ -62,7 +62,6 @@ func _process(_delta):  #mouse events
 	if isDead and time_since_died >= respawn_time:
 		handle_respawn()
 	
-	
 func isShooting(_delta):
 	if onClick:
 		#time_since_last_shot += _delta
@@ -70,8 +69,7 @@ func isShooting(_delta):
 		weapon.shootBullet()
 		time_since_last_shot = 0
 		onClick = false
-		
-		
+				
 func _unhandled_input(event):
 	if time_since_last_shot >= shootDelay:
 		if event.is_action_pressed("MouseLeft"):

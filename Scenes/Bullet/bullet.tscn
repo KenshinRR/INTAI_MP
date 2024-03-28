@@ -28,7 +28,7 @@ position = Vector2(-9, 0)
 shape = SubResource("RectangleShape2D_8cv81")
 
 [node name="DisplayTimer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 0.1
 autostart = true
 
 [node name="Trail" type="Line2D" parent="."]

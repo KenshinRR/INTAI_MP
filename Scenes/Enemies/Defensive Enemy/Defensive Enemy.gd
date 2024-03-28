@@ -3,11 +3,12 @@ extends CharacterBody2D
 signal bulletShoot(bullet, position, direction)
 signal invi
 
+@onready var vision_pro_max = $"Vision ProMax"
+@onready var weapon = $Weapon
 @onready var health = $Health
 var player
-var vision_pro_max
 var isMoving = false
-var MovementSpeed = 50
+var MovementSpeed = 100
 var targetPosition = Vector2.ZERO
 var isDead = false
 var time_since_died = 0
@@ -27,7 +28,7 @@ func handle_hit():
 	health.health -= 10
 	if health.health <= 0:
 		isDead = true
-		
+		ScoreManager.player_kills += 1
 
 func _ready():
 	if FirstSpawn:
@@ -38,9 +39,9 @@ func _ready():
 	print(get_tree().get_nodes_in_group("Spawn Locations").size())
 	deadLocation = get_tree().get_nodes_in_group("Respawn Locations")[1]
 	player = get_tree().get_first_node_in_group("Player")
-	vision_pro_max = get_tree().get_first_node_in_group("Vision ProMax")
 	tile_map = get_tree().get_first_node_in_group("Map")
 	
+	weapon.weaponFired.connect(self.shootBullet)
 	global_position = SpawnLocation.global_position
 	
 	AStarGrid = AStarGrid2D.new()
@@ -73,7 +74,10 @@ func _ready():
 				AStarGrid.set_point_solid(tile_position)
 				
 func _process(_delta):
-	
+	look_at(player.global_position)
+	time_since_last_shot += _delta
+	vision_pro_max.target_position = to_local(player.position)
+	checkPlayerVisible()
 	
 	if isMoving:
 		return	
@@ -89,7 +93,14 @@ func _process(_delta):
 	if isDead and time_since_died >= respawn_time:
 		handle_respawn()
 	
+func checkPlayerVisible():
+	if vision_pro_max.get_collider() == player and time_since_last_shot >= shootDelay:
+		weapon.shootBullet()
+		time_since_last_shot = 0
 
+		
+func shootBullet(bullet_instance, location, direction):
+	emit_signal("bulletShoot", bullet_instance, location, direction)
 	
 func move():
 	var path = AStarGrid.get_id_path(
@@ -109,7 +120,7 @@ func move():
 func _physics_process(_delta):
 	if isMoving:
 		var direction = targetPosition - global_position
-		velocity = (direction.normalized() * MovementSpeed)
+		velocity = (direction * MovementSpeed) * _delta
 		move_and_slide()
 
 	else:
@@ -131,8 +142,7 @@ func power_handle(rando):
 	if rando == 0:
 		print("chaos")
 	if rando == 1:
-		emit_signal("invi")
-	
+		emit_signal("invi")	
 	if rando == 2:
 		health.health = 0
 		isDead = true
