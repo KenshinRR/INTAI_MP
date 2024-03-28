@@ -4233,8 +4233,8 @@ position = Vector2(272, 200)
 [node name="Defensive AI" parent="." instance=ExtResource("7_2srjw")]
 position = Vector2(8, 8)
 
+[node name="Watchpoint" type="Marker2D" parent="."]
+position = Vector2(152, 64)
+
 [node name="Smart Enemy" parent="." instance=ExtResource("7_3usb7")]
 position = Vector2(24, 40)
-
-[node name="Watchpoint" type="Marker2D" parent="Smart Enemy"]
-position = Vector2(152, 64)

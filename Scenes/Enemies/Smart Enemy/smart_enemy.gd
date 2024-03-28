@@ -11,7 +11,7 @@ signal bulletShoot(bullet, position, direction)
 @onready var tile_map = $"../Map"
 var astar_grid: AStarGrid2D
 @onready var player = $"../Player"
-@onready var watchpoint = $Watchpoint
+@onready var watchpoint = $"../Watchpoint"
 @onready var playerBaseNode = $"../Bases/Player"
 var base_target : Array
 
