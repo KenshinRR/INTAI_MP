@@ -18,10 +18,9 @@ func _process(_delta):
 
 
 func _on_area_2d_body_entered(body):
-	if body.name == "Player":
-		if body.has_method("power_handle"):
-			body.power_handle(rando)
-		queue_free()
+	if body.has_method("power_handle"):
+		body.power_handle(rando)
+	queue_free()
 		
 		
 	

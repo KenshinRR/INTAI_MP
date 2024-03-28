@@ -161,8 +161,13 @@ func _getAvailableBase():
 func handle_respawn():
 	global_position = SpawnLocation.global_position
 	isDead = false
+	health.health = 10
 	time_since_died = 0
 	
 func handle_death():
 	global_position = deadLocation.global_position
+	pass
+	
+func power_handle(rando):
+	print("touched")
 	pass

@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 signal bulletShoot(bullet, position, direction)
+signal invi
 
 @onready var health = $Health
 var player
@@ -119,9 +120,20 @@ func _physics_process(_delta):
 func handle_respawn():
 	global_position = SpawnLocation.global_position
 	isDead = false
+	health.health = 10
 	time_since_died = 0
 	
 func handle_death():
 	global_position = deadLocation.global_position
 	pass
 
+func power_handle(rando):
+	if rando == 0:
+		print("chaos")
+	if rando == 1:
+		emit_signal("invi")
+	
+	if rando == 2:
+		health.health = 0
+		isDead = true
+		print("mines")

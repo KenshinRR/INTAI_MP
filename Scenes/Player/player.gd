@@ -82,13 +82,12 @@ func shootBullet(bullet_instance, location, direction):
 
 func power_handle(rando):
 	if rando == 0:
-		
 		print("chaos")
 	if rando == 1:
 		emit_signal("invi")
 	
 	if rando == 2:
-		health = 0
+		health.health = 0
 		isDead = true
 		print("mines")
 		
@@ -100,6 +99,7 @@ func handle_hit():
 func handle_respawn():
 	global_position = Penacony.global_position
 	isDead = false
+	health.health = 10
 	time_since_died = 0
 
 func handle_death():
