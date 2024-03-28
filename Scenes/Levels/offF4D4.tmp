@@ -4325,7 +4325,4 @@ position = Vector2(249, 40)
 [connection signal="invi" from="Player" to="Bases/Player/PlayerBase1" method="_on_player_invi"]
 [connection signal="invi" from="Player" to="Bases/Player/PlayerBase2" method="_on_player_invi"]
 [connection signal="invi" from="Player" to="Bases/Player/PlayerBase3" method="_on_player_invi"]
-[connection signal="scram" from="Player" to="Bases/Player/PlayerBase1" method="_on_player_scram"]
-[connection signal="scram" from="Player" to="Bases/Player/PlayerBase2" method="_on_player_scram"]
-[connection signal="scram" from="Player" to="Bases/Player/PlayerBase3" method="_on_player_scram"]
 [connection signal="timeout" from="PrepTimer" to="." method="_on_prep_timer_timeout"]
