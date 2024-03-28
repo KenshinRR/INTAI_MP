@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://che6mvpwrrqut" path="res://Scenes/Player/pewpew.png" id="1_2grxa"]
 [ext_resource type="Script" path="res://Scenes/Enemies/Smart Enemy/smart_enemy.gd" id="1_itxdu"]
-[ext_resource type="Script" path="res://Scenes/Health.gd" id="3_ait0b"]
+[ext_resource type="Script" path="res://View/Map/PowerUps/Health.gd" id="3_ait0b"]
 [ext_resource type="Script" path="res://Scenes/Player/Weapon.gd" id="4_81fmu"]
 [ext_resource type="PackedScene" uid="uid://bfkvw3o2633g6" path="res://Scenes/Bullet/bullet.tscn" id="5_qv3wl"]
 

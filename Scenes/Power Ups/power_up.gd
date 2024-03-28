@@ -1,11 +1,16 @@
 extends Node2D
 
-signal caught
+signal caught(rando)
+var rando 
+
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
+	var power_up_types = $AnimatedSprite2D.sprite_frames.get_animation_names()
+	rando = randi() % power_up_types.size()
+	$AnimatedSprite2D.play(power_up_types[rando])
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -14,6 +19,7 @@ func _process(_delta):
 
 func _on_area_2d_body_entered(body):
 	if body.name == "Player":
-		caught.emit()
 		queue_free()
-	pass # Replace with function body.
+		emit_signal("caught", rando)
+		
+	

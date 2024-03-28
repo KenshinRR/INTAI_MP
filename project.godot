@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="INTAI MP"
-run/main_scene="res://Scenes/Levels/office.tscn"
+run/main_scene="res://Scenes/Levels/title_screen.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
 

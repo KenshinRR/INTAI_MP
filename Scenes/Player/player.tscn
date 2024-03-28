@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://che6mvpwrrqut" path="res://Scenes/Player/pewpew.png" id="1_qc4om"]
 [ext_resource type="Script" path="res://Scenes/Player/Weapon.gd" id="3_0l6mq"]
 [ext_resource type="PackedScene" uid="uid://bfkvw3o2633g6" path="res://Scenes/Bullet/bullet.tscn" id="4_epyci"]
-[ext_resource type="Script" path="res://Scenes/Health.gd" id="4_n4qah"]
+[ext_resource type="Script" path="res://View/Map/PowerUps/Health.gd" id="5_hhwlt"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xahvd"]
 radius = 8.0
@@ -212,4 +212,4 @@ position = Vector2(25, -3)
 position = Vector2(27, -3)
 
 [node name="Health" type="Node" parent="."]
-script = ExtResource("4_n4qah")
+script = ExtResource("5_hhwlt")

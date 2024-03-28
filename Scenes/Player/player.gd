@@ -2,6 +2,8 @@ extends CharacterBody2D
 @export var MovementSpeed = 50.0
 @export var startDirection = Vector2(0,1)
 
+#@onready var animation_tree = $AnimationTree
+
 signal bulletShoot(bullet, position, direction)
 
 var onHold = false
@@ -13,10 +15,15 @@ var health = 120
 var isDead = false
 
 @onready var weapon = $Weapon
-
+@onready var power = preload("res://Scenes/Power Ups/power_up.tscn")
+var pwn
 func _ready(): #sets the initial direction the sprite is facing
 	#_updateDirection(startDirection)
 	weapon.weaponFired.connect(self.shootBullet)
+	#pwn = power.instantiate()
+	#add_child(pwn)
+	#pwn.caught.connect(self.power_handle)
+	
 
 func _physics_process(_delta): #handles movement
 	var direction = Vector2(Input.get_action_strength("Move_Right") - Input.get_action_strength("Move_Left"),
@@ -33,6 +40,7 @@ func _process(_delta):  #mouse events
 	isShooting(_delta)
 	look_at(get_global_mouse_position())
 	
+	
 func isShooting(_delta):
 	if onHold:
 		time_since_last_shot += _delta
@@ -48,6 +56,12 @@ func _unhandled_input(event):
 
 func shootBullet(bullet_instance, location, direction):
 	emit_signal("bulletShoot", bullet_instance, location, direction)
+
+func power_handle(rando):
+	if rando == 0:
+		health = 0
+		isDead = true
+		print("chaos")
 		
 func handle_hit():
 	health -= 10

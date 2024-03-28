@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://che6mvpwrrqut" path="res://Scenes/Player/pewpew.png" id="2_16qxu"]
 [ext_resource type="Script" path="res://Scenes/Player/Weapon.gd" id="3_po5se"]
 [ext_resource type="PackedScene" uid="uid://bfkvw3o2633g6" path="res://Scenes/Bullet/bullet.tscn" id="4_it76a"]
-[ext_resource type="Script" path="res://Scenes/Health.gd" id="5_yb64o"]
+[ext_resource type="Script" path="res://View/Map/PowerUps/Health.gd" id="5_yb64o"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ahqvp"]
 radius = 8.0
@@ -177,6 +177,7 @@ modulate = Color(1, 0, 1, 1)
 collision_layer = 2
 collision_mask = 15
 script = ExtResource("1_j1h6f")
+metadata/_edit_horizontal_guides_ = [24.0]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1
