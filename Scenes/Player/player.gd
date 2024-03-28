@@ -6,24 +6,24 @@ extends CharacterBody2D
 
 signal bulletShoot(bullet, position, direction)
 
-var onHold = false
+var onClick = false
 
-var shootDelay = 2   #delay in seconds ADJUST IF NEEDED
+var shootDelay = 1.5  #delay in seconds ADJUST IF NEEDED
 var time_since_last_shot = 0
 
-var health = 120
+@onready var health = $Health
 var isDead = false
 
 @onready var weapon = $Weapon
 @onready var power = preload("res://Scenes/Power Ups/power_up.tscn")
 var pwn
+
 func _ready(): #sets the initial direction the sprite is facing
 	#_updateDirection(startDirection)
 	weapon.weaponFired.connect(self.shootBullet)
 	#pwn = power.instantiate()
 	#add_child(pwn)
-	#pwn.caught.connect(self.power_handle)
-	
+	#pwn.caught.connect(self.power_handle)	
 
 func _physics_process(_delta): #handles movement
 	var direction = Vector2(Input.get_action_strength("Move_Right") - Input.get_action_strength("Move_Left"),
@@ -37,22 +37,26 @@ func _physics_process(_delta): #handles movement
 		handle_death()
 	
 func _process(_delta):  #mouse events
+	time_since_last_shot += _delta
 	isShooting(_delta)
 	look_at(get_global_mouse_position())
 	
 	
 func isShooting(_delta):
-	if onHold:
-		time_since_last_shot += _delta
-		if time_since_last_shot >= shootDelay:	#makes sure to not shoot bullets instantly
-			weapon.shootBullet()
-			time_since_last_shot = 0
+	if onClick:
+		#time_since_last_shot += _delta
+		#if time_since_last_shot >= shootDelay:	#makes sure to not shoot bullets instantly
+		weapon.shootBullet()
+		time_since_last_shot = 0
+		onClick = false
+		
 		
 func _unhandled_input(event):
-	if event.is_action_pressed("MouseLeft"):
-		onHold = true
-	if event.is_action_released("MouseLeft"):
-		onHold = false
+	if time_since_last_shot >= shootDelay:
+		if event.is_action_pressed("MouseLeft"):
+			onClick = true
+	#if event.is_action_released("MouseLeft"):
+		#onHold = false
 
 func shootBullet(bullet_instance, location, direction):
 	emit_signal("bulletShoot", bullet_instance, location, direction)
@@ -64,10 +68,11 @@ func power_handle(rando):
 		print("chaos")
 		
 func handle_hit():
-	health -= 10
-	if health <= 0:
+	health.health -= 10
+	if health.health <= 0:
 		isDead = true
 
+
 func handle_death():
-	$Sprite2D.visible = false
+	
 	return

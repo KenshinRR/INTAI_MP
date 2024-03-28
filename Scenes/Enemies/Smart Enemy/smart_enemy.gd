@@ -3,7 +3,7 @@ extends CharacterBody2D
 #aiming and shooting
 @onready var raycast = $LineOfSight
 var time_since_last_shot = 0
-var shootDelay = 2 
+var shootDelay = 1.5 
 @onready var weapon = $Weapon
 signal bulletShoot(bullet, position, direction)
 
@@ -97,7 +97,6 @@ func move():
 		tile_map.local_to_map(target)
 	)
 	
-	
 	path.pop_front()
 	
 	if path.is_empty():
@@ -107,7 +106,7 @@ func move():
 	target_position = tile_map.map_to_local(path[0])
 	
 	is_moving = true
-	
+
 func _physics_process(delta):
 	#movement
 	var direction = target_position - global_position

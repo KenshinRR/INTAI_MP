@@ -216,3 +216,5 @@ position = Vector2(25, -3)
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("5_yb64o")
+
+[node name="Vision ProMax" type="RayCast2D" parent="."]

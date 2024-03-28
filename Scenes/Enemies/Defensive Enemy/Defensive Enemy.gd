@@ -1,16 +1,21 @@
 extends CharacterBody2D
 
-@onready var health = $Health
+signal bulletShoot(bullet, position, direction)
+
+var health
 var spawn = false
 
-@onready var sprite_2d = $Sprite2D
-@onready var player = $"../Player"
+var player
+var vision_pro_max
 var isMoving = false
 var MovementSpeed = 50
 var targetPosition = Vector2.ZERO
 
-@onready var tile_map = $"../Map"
+var shootDelay = 1.5  #delay in seconds ADJUST IF NEEDED
+var time_since_last_shot = 0
+
 var AStarGrid: AStarGrid2D
+var tile_map
 
 func handle_hit():
 	health.health -= 10
@@ -19,6 +24,11 @@ func handle_hit():
 		spawn = true
 
 func _ready():
+	health = get_tree().get_first_node_in_group("Health")
+	player = get_tree().get_first_node_in_group("Player")
+	vision_pro_max = get_tree().get_first_node_in_group("Vision ProMax")
+	tile_map = get_tree().get_first_node_in_group("Map")
+	
 	AStarGrid = AStarGrid2D.new()
 	AStarGrid.region = tile_map.get_used_rect()
 	AStarGrid.cell_size = Vector2(16,16)
@@ -49,6 +59,8 @@ func _ready():
 				AStarGrid.set_point_solid(tile_position)
 				
 func _process(_delta):
+	
+	
 	if isMoving:
 		return
 		
