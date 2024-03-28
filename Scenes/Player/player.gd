@@ -3,6 +3,7 @@ extends CharacterBody2D
 @export var startDirection = Vector2(0,1)
 
 signal bulletShoot(bullet, position, direction)
+signal invi
 
 var onClick = false
 
@@ -81,9 +82,15 @@ func shootBullet(bullet_instance, location, direction):
 
 func power_handle(rando):
 	if rando == 0:
+		
+		print("chaos")
+	if rando == 1:
+		emit_signal("invi")
+	
+	if rando == 2:
 		health = 0
 		isDead = true
-		print("chaos")
+		print("mines")
 		
 func handle_hit():
 	health.health -= 10
