@@ -28,7 +28,8 @@ var deadLocation
 func handle_hit():
 	health.health -= 10
 	if health.health <= 0:
-		queue_free()
+		handle_death()
+		isDead = true
 		spawn = true
 
 func _ready():
@@ -78,9 +79,10 @@ func _process(_delta):
 	if is_moving:
 		return
 		
-	if !isDead:
+	if isDead:
+		handle_death()
+	else:
 		move()
-		
 	
 	
 func move():
@@ -142,4 +144,5 @@ func _getAvailableBase():
 			return target
 
 func handle_death():
+	global_position = deadLocation.global_position
 	pass

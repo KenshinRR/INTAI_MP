@@ -1,6 +1,6 @@
 extends Node
 
-@export var health = 120: set = setHealth
+@export var health = 10: set = setHealth
 
 func setHealth(Health):
 	health = Health
