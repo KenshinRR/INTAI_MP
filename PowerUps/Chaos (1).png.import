@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://di3ucf38cj5xt"
-path="res://.godot/imported/Chaos (1).png-3c852f5cce0df9add828e464d4664f48.ctex"
+path="res://.godot/imported/Chaos (1).png-61f04e8b47eac32f41d1dfddaee27f1a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://View/Map/PowerUps/Chaos (1).png"
-dest_files=["res://.godot/imported/Chaos (1).png-3c852f5cce0df9add828e464d4664f48.ctex"]
+source_file="res://PowerUps/Chaos (1).png"
+dest_files=["res://.godot/imported/Chaos (1).png-61f04e8b47eac32f41d1dfddaee27f1a.ctex"]
 
 [params]
 
