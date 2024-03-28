@@ -29,7 +29,7 @@ func _ready(): #sets the initial direction the sprite is facing
 		Spawner = randi_range(0,2)
 		FirstSpawn = false
 	
-	Penacony = get_tree().get_nodes_in_group("Spawn Locations")[Spawner]
+	Penacony = get_tree().get_nodes_in_group("Player Spawns")[Spawner]
 	HSS = get_tree().get_nodes_in_group("Respawn Locations")[0]
 	weapon.weaponFired.connect(self.shootBullet)
 	#pwn = power.instantiate()

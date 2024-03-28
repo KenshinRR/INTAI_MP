@@ -25,14 +25,16 @@ var tile_map
 func handle_hit():
 	health.health -= 10
 	if health.health <= 0:
-		queue_free()
+		isDead = true
+		
 
 func _ready():
 	if FirstSpawn:
-		Spawner = randi_range(3,5)
+		Spawner = randi_range(0,2)
 		FirstSpawn = false
 	
-	SpawnLocation = get_tree().get_nodes_in_group("Spawn Locations")[Spawner]
+	SpawnLocation = get_tree().get_nodes_in_group("Enemy Spawns")[Spawner]
+	print(get_tree().get_nodes_in_group("Spawn Locations").size())
 	deadLocation = get_tree().get_nodes_in_group("Respawn Locations")[1]
 	player = get_tree().get_first_node_in_group("Player")
 	vision_pro_max = get_tree().get_first_node_in_group("Vision ProMax")
@@ -71,16 +73,19 @@ func _ready():
 				
 func _process(_delta):
 	
-
+	
 	if isMoving:
 		return	
 	if isDead:
 		handle_death()
-		time_since_died += _delta
-	elif isDead and time_since_died >= respawn_time:
-		handle_respawn()
 	else:
 		move()
+		
+	if isDead:
+		time_since_died += _delta
+	
+	if isDead and time_since_died >= respawn_time:
+		handle_respawn()
 	
 
 	

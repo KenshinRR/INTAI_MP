@@ -21,7 +21,6 @@ var target_position = Vector2.ZERO
 
 #heath
 @onready var health = $Health
-var spawn = false
 var isDead = false
 var time_since_died = 0
 var respawn_time = 5
@@ -33,17 +32,15 @@ var SpawnLocation
 func handle_hit():
 	health.health -= 10
 	if health.health <= 0:
-		handle_death()
 		isDead = true
-		spawn = true
 
 func _ready():
 	#setting up the variables
 	if FirstSpawn:
-		Spawner = randi_range(3,5)
+		Spawner = randi_range(0,2)
 		FirstSpawn = false
 	
-	SpawnLocation = get_tree().get_nodes_in_group("Spawn Locations")[Spawner]
+	SpawnLocation = get_tree().get_nodes_in_group("Enemy Spawns")[Spawner]
 	base_target = get_tree().get_nodes_in_group("Player Bases")
 	watchpoint = get_tree().get_first_node_in_group("Watchpoint")
 	player = get_tree().get_first_node_in_group("Player")
@@ -116,8 +113,6 @@ func move():
 			target = watchpoint.global_position
 		else:
 			target = player.global_position
-	
-
 	
 	#getting path
 	var path = astar_grid.get_id_path(
