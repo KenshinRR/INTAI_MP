@@ -35,6 +35,7 @@ signal invi
 func handle_hit():
 	health.health -= 10
 	if health.health <= 0:
+		ScoreManager.player_kills += 1
 		isDead = true
 
 func _ready():
