@@ -79,7 +79,8 @@ func _process(_delta):
 	if isDead:
 		handle_death()
 	else:
-		move()
+		if !player.isDead:
+			move()
 		
 	if isDead:
 		time_since_died += _delta
