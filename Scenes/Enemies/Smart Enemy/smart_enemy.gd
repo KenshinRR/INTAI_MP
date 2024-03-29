@@ -33,6 +33,7 @@ var SpawnLocation
 
 #powerup
 signal invi
+signal scram
 
 func _ready():
 	#setting up the variables
@@ -118,6 +119,9 @@ func _on_timer_timeout():
 	pass # Replace with function body.
 
 func move():
+	#looking for power ups
+	#_updateGridValues()
+	
 	#deciding where to go
 	var player_tile_data = tile_map.get_cell_tile_data(0, tile_map.local_to_map(player.global_position))
 	
@@ -131,7 +135,10 @@ func move():
 			target = watchpoint.global_position
 		else:
 			target = player.global_position
-	
+			
+	if target == null: #if target is still null somehow
+		target = watchpoint.global_position #go back to base
+		
 	#getting path
 	var path = astar_grid.get_id_path(
 		tile_map.local_to_map(global_position),
@@ -149,8 +156,11 @@ func move():
 	is_moving = true
 
 func _updateGridValues():
-	var power_up_locs = get_tree().get_nodes_in_group("power_ups")
+	var power_ups = get_tree().get_nodes_in_group("power_ups")
 	
+	for power_up in power_ups:
+		var locPos = tile_map.local_to_map(power_up.global_position)
+		astar_grid.set_point_weight_scale(locPos, 10)
 	
 	pass
 
@@ -165,9 +175,27 @@ func shootBullet(bullet_instance, location, direction):
 	emit_signal("bulletShoot", bullet_instance, location, direction)
 
 func _getAvailableBase():
+	#getting the available bases
+	var base_target_buffer : Array
 	for target in base_target:
 		if !target.is_destroyed:
-			return target
+			base_target_buffer.append(target)
+	
+	#initialize distance to target
+	var targetDistance = global_position.distance_to(base_target_buffer[0].global_position)
+	targetDistance = int(targetDistance)
+	var currentDistance #buffer for the distance of the current target
+	var targetSpotted# = base_target[0]#the target value to return
+	
+	for target in base_target_buffer:
+		currentDistance = global_position.distance_to(target.global_position)
+		currentDistance = int(currentDistance)
+		print(targetDistance, " ", currentDistance)
+		if targetDistance >= currentDistance:
+			targetDistance = currentDistance
+			targetSpotted = target
+				
+	return targetSpotted 
 
 func handle_hit():
 	health.health -= 10
@@ -187,6 +215,7 @@ func handle_death():
 	
 func power_handle(rando):
 	if rando == 0:
+		emit_signal("scram")
 		print("chaos")
 	if rando == 1:
 		emit_signal("invi")
