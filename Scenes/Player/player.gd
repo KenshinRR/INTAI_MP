@@ -97,6 +97,7 @@ func power_handle(rando):
 func handle_hit():
 	health.health -= 10
 	if health.health <= 0:
+		ScoreManager.enemy_kills+= 1
 		isDead = true
 
 func handle_respawn():

@@ -20,7 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://c40cefoc8cqfi" path="res://View/Map/PowerUps/Mine01.png" id="18_xvbw7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tbqwu"]
-size = Vector2(16, 18)
+size = Vector2(16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_enmhk"]
 animations = [{
@@ -99,7 +99,6 @@ collision_layer = 0
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_tbqwu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

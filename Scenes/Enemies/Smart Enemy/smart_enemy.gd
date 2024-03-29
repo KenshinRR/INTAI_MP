@@ -20,6 +20,7 @@ var MovementSpeed = 100
 var target_position = Vector2.ZERO
 var prepTimer
 var roundStart = false
+var powerUp_locs : Array
 
 #heath
 @onready var health = $Health
@@ -120,7 +121,7 @@ func _on_timer_timeout():
 
 func move():
 	#looking for power ups
-	#_updateGridValues()
+	_updateGridValues()
 	
 	#deciding where to go
 	var player_tile_data = tile_map.get_cell_tile_data(0, tile_map.local_to_map(player.global_position))
@@ -156,11 +157,29 @@ func move():
 	is_moving = true
 
 func _updateGridValues():
+	#reset values
+	#if powerUp_locs != null:
+		#for powerUp_loc in powerUp_locs:
+			#var bufferPos = tile_map.local_to_map(powerUp_loc)
+			#astar_grid.set_point_weight_scale(bufferPos, 0)
+			#astar_grid.set_point_solid(bufferPos, false)
+		#
+		#powerUp_locs.clear()
+		
 	var power_ups = get_tree().get_nodes_in_group("power_ups")
 	
 	for power_up in power_ups:
 		var locPos = tile_map.local_to_map(power_up.global_position)
-		astar_grid.set_point_weight_scale(locPos, 10)
+		print("PowerUp at: ", locPos)
+		match power_up.rando:
+			1:
+				print("Found good one")
+				astar_grid.set_point_weight_scale(locPos, 10)
+			_:
+				print("Found non desirable")
+				astar_grid.set_point_solid(locPos)
+			
+		powerUp_locs.append(locPos)
 	
 	pass
 
@@ -180,6 +199,9 @@ func _getAvailableBase():
 	for target in base_target:
 		if !target.is_destroyed:
 			base_target_buffer.append(target)
+	
+	if base_target_buffer == null:
+		return
 	
 	#initialize distance to target
 	var targetDistance = global_position.distance_to(base_target_buffer[0].global_position)
