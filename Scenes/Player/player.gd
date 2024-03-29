@@ -5,6 +5,8 @@ extends CharacterBody2D
 signal bulletShoot(bullet, position, direction)
 signal invi
 signal scram
+signal reload
+signal died
 
 var onClick = false
 
@@ -78,6 +80,7 @@ func _unhandled_input(event):
 
 func shootBullet(bullet_instance, location, direction):
 	emit_signal("bulletShoot", bullet_instance, location, direction)
+	emit_signal("reload")
 
 func power_handle(rando):
 	if rando == 0:
@@ -104,4 +107,5 @@ func handle_respawn():
 
 func handle_death():
 	global_position = HSS.global_position
+	emit_signal("died")
 	return
