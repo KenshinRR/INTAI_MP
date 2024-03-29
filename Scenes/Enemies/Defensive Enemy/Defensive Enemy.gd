@@ -99,7 +99,8 @@ func _process(_delta):
 	
 	if isDead and time_since_died >= respawn_time:
 		handle_respawn()
-	
+
+#function for checking if the AI can directly see the player
 func checkPlayerVisible():
 	if vision_pro_max.get_collider() == player and time_since_last_shot >= shootDelay:
 		weapon.shootBullet()
@@ -108,25 +109,30 @@ func checkPlayerVisible():
 func shootBullet(bullet_instance, location, direction):
 	emit_signal("bulletShoot", bullet_instance, location, direction)
 	
+#function to decide where AI should go
 func move():
 	var playerData = tile_map.get_cell_tile_data(0, tile_map.local_to_map(player.global_position))
 	var targetLocation
 	var powerUpLoc
 		
-	if powerUps.is_empty() == false:
+	if powerUps.is_empty() == false: 	#if there is a power up
 		for power_up in powerUps:
 			var powerData = tile_map.get_cell_tile_data(0, tile_map.local_to_map(power_up.global_position))
 			if power_up.rando == 1 and powerData.get_custom_data("Enemy Base"):
+				#if the power up is the invi power up
 				targetLocation = power_up.global_position
 				break
-			else:
-				targetLocation = watchpoint.global_position
+
+			targetLocation = watchpoint.global_position
 	else:
+		#go to watch point if there are no current power up
 		targetLocation = watchpoint.global_position
 				
 	if playerData.get_custom_data("Enemy Base"):
+		#go to player position if player entered the enemy base
 		targetLocation = player.global_position
 
+	#setting the path
 	var path = AStarGrid.get_id_path(
 		tile_map.local_to_map(global_position),
 		tile_map.local_to_map(targetLocation)
@@ -136,9 +142,10 @@ func move():
 
 	if path.is_empty():
 		return
-
+	
+	#setting targetPosition to the front of the path for smooth walking
 	targetPosition = tile_map.map_to_local(path[0])
-
+	
 	isMoving = true
 	
 func _physics_process(_delta):
@@ -146,7 +153,6 @@ func _physics_process(_delta):
 		var direction = targetPosition - global_position
 		velocity = (direction * MovementSpeed) * _delta
 		move_and_slide()
-
 	else:
 		velocity = Vector2.ZERO
 	
