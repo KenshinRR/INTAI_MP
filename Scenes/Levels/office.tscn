@@ -25,6 +25,19 @@ func _ready():
 	player.bulletShoot.connect(BulletManager.handleBulletSpawn)
 	enemy.bulletShoot.connect(BulletManager.handleBulletSpawn)
 	defensive_ai.bulletShoot.connect(BulletManager.handleBulletSpawn)
+	
+func _process(delta):
+	if ScoreManager.player_score >= 3:
+		end()
+	elif ScoreManager.enemy_score >= 3:
+		print(\"Enemy Wins!\")
+		end()
+	pass
+func end():
+	$GameEndScreen.show()
+	$StatisticsPlayer.hide()
+	$StatisticsBot.hide()
+	
 func _on_prep_timer_timeout():
 	$Message.hide()
 	$MessageBox.hide()
@@ -32,6 +45,11 @@ func _on_prep_timer_timeout():
 
 
 
+
+
+func _on_game_end_screen_gone():
+	get_tree().change_scene_to_file(\"res://Scenes/Levels/title_screen.tscn\")
+	pass # Replace with function body.
 "
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rairw"]
@@ -4328,10 +4346,10 @@ offset_bottom = -12.0
 scale = Vector2(0.6, 0.6)
 
 [node name="GameEndScreen" parent="." instance=ExtResource("9_qsno0")]
-offset_left = -23.0
-offset_top = -53.0
-offset_right = -23.0
-offset_bottom = -53.0
+offset_left = -145.0
+offset_top = 10.0
+offset_right = -145.0
+offset_bottom = 10.0
 
 [connection signal="died" from="Player" to="StatisticsPlayer" method="_on_player_died"]
 [connection signal="invi" from="Player" to="Bases/Player/PlayerBase1" method="_on_player_invi"]
@@ -4343,3 +4361,4 @@ offset_bottom = -53.0
 [connection signal="scram" from="Player" to="Bases/Player/PlayerBase2" method="_on_player_scram"]
 [connection signal="scram" from="Player" to="Bases/Player/PlayerBase3" method="_on_player_scram"]
 [connection signal="timeout" from="PrepTimer" to="." method="_on_prep_timer_timeout"]
+[connection signal="gone" from="GameEndScreen" to="." method="_on_game_end_screen_gone"]

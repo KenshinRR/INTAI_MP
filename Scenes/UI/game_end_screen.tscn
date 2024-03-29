@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://o6j8rd1jc3l1"]
+[gd_scene load_steps=2 format=3 uid="uid://o6j8rd1jc3l1"]
+
+[ext_resource type="Script" path="res://Scenes/UI/game_end_screen.gd" id="1_utxov"]
 
 [node name="GameEndScreen" type="Control"]
 layout_mode = 3
@@ -7,11 +9,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_utxov")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
-offset_right = 345.0
-offset_bottom = 401.0
+offset_right = 589.0
+offset_bottom = 229.0
 color = Color(0.152941, 0.152941, 0.152941, 0.643137)
 
 [node name="GameOverMessage" type="Label" parent="ColorRect"]
@@ -25,3 +28,20 @@ offset_right = 88.5
 offset_bottom = 73.0
 grow_horizontal = 2
 text = "Who Won? Who's Next?"
+
+[node name="Button" type="Button" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -78.5
+offset_top = -101.0
+offset_right = 78.5
+offset_bottom = -70.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Back to Main Menu"
+
+[connection signal="pressed" from="ColorRect/Button" to="." method="_on_button_pressed"]

@@ -13,16 +13,10 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if player_score >= 3:
-		print("Player Wins!")
-		handleWin()
-	elif enemy_score >= 3:
-		print("Enemy Wins!")
-		handleWin()
 	pass
 
-func handleWin():
-	get_tree().change_scene_to_file("res://Scenes/Levels/title_screen.tscn")
+#func handleWin():
+	#get_tree().change_scene_to_file("res://Scenes/Levels/title_screen.tscn")
 
 func resetValues():
 	player_score = 0
