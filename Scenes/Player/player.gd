@@ -3,10 +3,10 @@ extends CharacterBody2D
 @export var startDirection = Vector2(0,1)
 
 signal bulletShoot(bullet, position, direction)
-signal invi
+signal invi(owner)
 signal scram(owner)
-signal reload
-signal died
+signal reload(owner)
+signal died(owner)
 
 var onClick = false
 
@@ -80,14 +80,14 @@ func _unhandled_input(event):
 
 func shootBullet(bullet_instance, location, direction):
 	emit_signal("bulletShoot", bullet_instance, location, direction)
-	emit_signal("reload")
+	emit_signal("reload","Player")
 
 func power_handle(rando):
 	if rando == 0:
 		emit_signal("scram", "Player")
 		print("chaos")
 	if rando == 1:
-		emit_signal("invi")
+		emit_signal("invi", "Player")
 		print("invi")
 	if rando == 2:
 		health.health = 0
@@ -108,5 +108,5 @@ func handle_respawn():
 
 func handle_death():
 	global_position = HSS.global_position
-	emit_signal("died")
+	emit_signal("died","Player")
 	return

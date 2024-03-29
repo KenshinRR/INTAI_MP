@@ -1,7 +1,7 @@
 extends Control
 
 signal timeUp
-var time = 10
+var time = 120
 var mins 
 var secs
 

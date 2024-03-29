@@ -1,12 +1,18 @@
 extends Control
 
-
+var player
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$ColorRect/Respawning.hide()
 	$ColorRect/Reloading.hide()
 	$ColorRect/Invi.hide()
+	
+	player = get_tree().get_first_node_in_group("Player")
+	
+	player.died.connect(_died)
+	player.reload.connect(_reload)
+	player.invi.connect(_invi)
 
 func _setText():
 	#check who's stats it is
@@ -30,32 +36,38 @@ func _process(_delta):
 	pass
 
 
-func _on_player_reload():
-	$ReloadTimer.start()
-	$ColorRect/Reloading.show()
-	pass # Replace with function body.
 
-
+	
+func _reload(owner):
+	if(owner == "Player" && self.name == "StatisticsPlayer"):
+		$ReloadTimer.start()
+		$ColorRect/Reloading.show()
+	if(owner == "Enemy" && self.name == "StatisticsBot"):
+		$ReloadTimer.start()
+		$ColorRect/Reloading.show()
+		
+func _died(owner):
+	if(owner == "Player" && self.name == "StatisticsPlayer"):
+		$ColorRect/Respawning.show()
+		$RespawnTimer.start()
+	if(owner == "Enemy" && self.name == "StatisticsBot"):
+		$ColorRect/Respawning.show()
+		$RespawnTimer.start()
+	
+func _invi(owner):
+	if(owner == "Player" && self.name == "StatisticsPlayer"):
+		$ColorRect/Invi.show()
+		$InviTimer.start()
+	if(owner == "Enemy" && self.name == "StatisticsBot"):
+		$ColorRect/Invi.show()
+		$InviTimer.start()
+	
 func _on_reload_timer_timeout():
 	$ColorRect/Reloading.hide()
 
 
 func _on_respawn_timer_timeout():
 	$ColorRect/Respawning.hide()
-
-
-func _on_player_died():
-	
-	
-	$ColorRect/Respawning.show()
-	$RespawnTimer.start()
-	
-
-
-func _on_player_invi():
-	$ColorRect/Invi.show()
-	$InviTimer.start()
-	pass # Replace with function body.
 
 
 func _on_invi_timer_timeout():
