@@ -99,6 +99,7 @@ collision_layer = 0
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(0.8, 0.8)
 shape = SubResource("RectangleShape2D_tbqwu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
