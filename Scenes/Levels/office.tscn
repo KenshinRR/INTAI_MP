@@ -1,14 +1,13 @@
-[gd_scene load_steps=15 format=3 uid="uid://begv0int516qh"]
+[gd_scene load_steps=14 format=3 uid="uid://begv0int516qh"]
 
 [ext_resource type="Texture2D" uid="uid://bnhsf3wai2y8h" path="res://View/Map/Room_Builder_free_16x16.png" id="1_oax6g"]
 [ext_resource type="Texture2D" uid="uid://i8hy6vsdnhld" path="res://View/Map/Interiors_free_16x16.png" id="2_iixnf"]
-[ext_resource type="PackedScene" uid="uid://bk1m1ungvuxh" path="res://Scenes/Buildings/power_up_spawner.tscn" id="4_uxkcd"]
+[ext_resource type="PackedScene" uid="uid://bk1m1ungvuxh" path="res://power_up_spawner.tscn" id="4_uxkcd"]
 [ext_resource type="PackedScene" uid="uid://51gkohx2lbt" path="res://Scenes/Player/player.tscn" id="5_3sh5g"]
 [ext_resource type="PackedScene" uid="uid://d08ci8qjjqp21" path="res://Scenes/Buildings/base.tscn" id="5_svojj"]
 [ext_resource type="PackedScene" uid="uid://bedx1tiharrag" path="res://Scenes/Enemies/Smart Enemy/smart_enemy.tscn" id="7_3usb7"]
 [ext_resource type="PackedScene" uid="uid://dbjxfippv1hxw" path="res://Scenes/Enemies/Defensive Enemy/Defensive Enemy.tscn" id="7_imtov"]
 [ext_resource type="PackedScene" uid="uid://c0rg6vawt3mcs" path="res://Scenes/UI/statistics.tscn" id="8_pfupf"]
-[ext_resource type="PackedScene" uid="uid://o6j8rd1jc3l1" path="res://Scenes/UI/game_end_screen.tscn" id="9_qsno0"]
 [ext_resource type="PackedScene" uid="uid://capsunsyhprhr" path="res://Scenes/UI/timer.tscn" id="10_377c7"]
 
 [sub_resource type="GDScript" id="GDScript_fmqis"]
@@ -23,7 +22,7 @@ script/source = "extends Node2D
 @export var power_up_scene: PackedScene
 
 func _ready():
-	$GameEndScreen.hide()
+	
 	$PrepTimer.start()
 	player.bulletShoot.connect(BulletManager.handleBulletSpawn)
 	enemy.bulletShoot.connect(BulletManager.handleBulletSpawn)
@@ -33,13 +32,12 @@ func _process(delta):
 	if ScoreManager.player_score >= 3:
 		end()
 	elif ScoreManager.enemy_score >= 3:
-		print(\"Enemy Wins!\")
+		
 		end()
 	pass
 func end():
-	$GameEndScreen.show()
-	$StatisticsPlayer.hide()
-	$StatisticsBot.hide()
+	get_tree().call_group(\"mobs\", \"queue_free\")
+	get_tree().change_scene_to_file(\"res://Scenes/UI/game_end_screen.tscn\")
 	
 func _on_prep_timer_timeout():
 	$Message.hide()
@@ -47,16 +45,8 @@ func _on_prep_timer_timeout():
 	pass # Replace with function body.
 
 
-
-
-
-func _on_game_end_screen_gone():
-	get_tree().change_scene_to_file(\"res://Scenes/Levels/title_screen.tscn\")
-	pass # Replace with function body.
-
-
 func _on_timer_time_up():
-	$GameEndScreen.show()
+	end()
 	pass # Replace with function body.
 "
 
@@ -4287,7 +4277,6 @@ position = Vector2(1, 13)
 one_shot = true
 
 [node name="MessageBox" type="ColorRect" parent="."]
-visible = false
 anchors_preset = -1
 anchor_left = -0.0617188
 anchor_right = 0.065625
@@ -4299,7 +4288,6 @@ color = Color(0.129412, 0.129412, 0.129412, 0.933333)
 metadata/_edit_use_anchors_ = true
 
 [node name="Message" type="Label" parent="."]
-visible = false
 offset_left = 112.0
 offset_top = 108.0
 offset_right = 197.0
@@ -4341,7 +4329,6 @@ position = Vector2(152, 42)
 position = Vector2(249, 40)
 
 [node name="StatisticsPlayer" parent="." instance=ExtResource("8_pfupf")]
-visible = false
 modulate = Color(0, 0.580392, 0.980392, 1)
 offset_left = 322.0
 offset_top = 199.0
@@ -4350,19 +4337,11 @@ offset_bottom = 199.0
 scale = Vector2(0.6, 0.6)
 
 [node name="StatisticsBot" parent="." instance=ExtResource("8_pfupf")]
-visible = false
 offset_left = -139.0
 offset_top = -12.0
 offset_right = -139.0
 offset_bottom = -12.0
 scale = Vector2(0.6, 0.6)
-
-[node name="GameEndScreen" parent="." instance=ExtResource("9_qsno0")]
-visible = false
-offset_left = -145.0
-offset_top = 10.0
-offset_right = -145.0
-offset_bottom = 10.0
 
 [node name="Timer" parent="." instance=ExtResource("10_377c7")]
 offset_left = -129.0
@@ -4381,5 +4360,4 @@ scale = Vector2(0.8, 0.8)
 [connection signal="scram" from="Player" to="Bases/Player/PlayerBase2" method="_on_player_scram"]
 [connection signal="scram" from="Player" to="Bases/Player/PlayerBase3" method="_on_player_scram"]
 [connection signal="timeout" from="PrepTimer" to="." method="_on_prep_timer_timeout"]
-[connection signal="gone" from="GameEndScreen" to="." method="_on_game_end_screen_gone"]
 [connection signal="timeUp" from="Timer" to="." method="_on_timer_time_up"]

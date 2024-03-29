@@ -1,16 +1,10 @@
 extends Control
 
-signal gone
+
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
 	#3 BASE KILL
 	if ScoreManager.player_score >=3:
 		$ColorRect/GameOverMessage.text = "Player Wins, Bases DESTROYED"
@@ -32,10 +26,23 @@ func _process(delta):
 		
 	else:
 		$ColorRect/GameOverMessage.text = "DRAW!"	
-			
+	
+	
+	$ColorRect/ColorRect/Kills.text = "Kills: " + str(ScoreManager.player_kills)
+	$ColorRect/ColorRect/PBases.text = "Bases Remaining: " +  str(3 - ScoreManager.enemy_score)
+	
+	$ColorRect/ColorRect2/BKills.text = "Kills: " + str(ScoreManager.enemy_kills)
+	$ColorRect/ColorRect2/BBases.text = "Bases Remaining: " + str(3 - ScoreManager.player_score)
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	
+	
 	pass
 
 
 func _on_button_pressed():
-	emit_signal("gone")
+	get_tree().change_scene_to_file("res://Scenes/Levels/title_screen.tscn")
 	pass # Replace with function body.
