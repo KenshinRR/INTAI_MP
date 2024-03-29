@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://begv0int516qh"]
+[gd_scene load_steps=13 format=3 uid="uid://begv0int516qh"]
 
 [ext_resource type="Texture2D" uid="uid://bnhsf3wai2y8h" path="res://View/Map/Room_Builder_free_16x16.png" id="1_oax6g"]
 [ext_resource type="Texture2D" uid="uid://i8hy6vsdnhld" path="res://View/Map/Interiors_free_16x16.png" id="2_iixnf"]
@@ -19,12 +19,16 @@ script/source = "extends Node2D
 @onready var defensive_ai = $\"Enemy/Defensive AI\"
 @onready var bullet_manager = \"res://Scenes/Bullet/BulletManager.gd\"
 @export var power_up_scene: PackedScene
-
+var timer
 func _ready():
 	
 	$PrepTimer.start()
 	player.bulletShoot.connect(BulletManager.handleBulletSpawn)
 	enemy.bulletShoot.connect(BulletManager.handleBulletSpawn)
+	
+	#set up to SEE nodes
+	$Timer.timeUp.connect(end)
+	
 	#defensive_ai.bulletShoot.connect(BulletManager.handleBulletSpawn)
 	
 func _process(delta):
@@ -44,9 +48,7 @@ func _on_prep_timer_timeout():
 	pass # Replace with function body.
 
 
-func _on_timer_time_up():
-	end()
-	pass # Replace with function body.
+
 "
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rairw"]
