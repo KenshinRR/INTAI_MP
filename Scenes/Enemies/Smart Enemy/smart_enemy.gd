@@ -146,6 +146,8 @@ func move():
 		tile_map.local_to_map(target)
 	)
 	
+	resetGridValues()
+	
 	path.pop_front()
 	
 	if path.is_empty():
@@ -157,14 +159,6 @@ func move():
 	is_moving = true
 
 func _updateGridValues():
-	#reset values
-	#if powerUp_locs != null:
-		#for powerUp_loc in powerUp_locs:
-			#var bufferPos = tile_map.local_to_map(powerUp_loc)
-			#astar_grid.set_point_weight_scale(bufferPos, 0)
-			#astar_grid.set_point_solid(bufferPos, false)
-		#
-		#powerUp_locs.clear()
 		
 	var power_ups = get_tree().get_nodes_in_group("power_ups")
 	
@@ -181,6 +175,14 @@ func _updateGridValues():
 			
 		powerUp_locs.append(locPos)
 	
+	pass
+	
+func resetGridValues():
+	for powerUp in powerUp_locs:
+		astar_grid.set_point_weight_scale(powerUp, 0)
+		astar_grid.set_point_solid(powerUp, false)
+		
+	powerUp_locs.clear()
 	pass
 
 func isShooting(_delta):
@@ -200,7 +202,7 @@ func _getAvailableBase():
 		if !target.is_destroyed:
 			base_target_buffer.append(target)
 	
-	if base_target_buffer == null:
+	if base_target_buffer.is_empty():
 		return
 	
 	#initialize distance to target
