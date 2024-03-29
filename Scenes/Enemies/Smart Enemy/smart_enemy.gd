@@ -190,7 +190,6 @@ func _getAvailableBase():
 	for target in base_target_buffer:
 		currentDistance = global_position.distance_to(target.global_position)
 		currentDistance = int(currentDistance)
-		print(targetDistance, " ", currentDistance)
 		if targetDistance >= currentDistance:
 			targetDistance = currentDistance
 			targetSpotted = target
