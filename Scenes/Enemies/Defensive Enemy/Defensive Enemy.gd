@@ -1,13 +1,14 @@
 extends CharacterBody2D
 
 signal bulletShoot(bullet, position, direction)
+signal scram(owner)
 signal invi
-
-@onready var timer = $"../../Timer"
 
 @onready var vision_pro_max = $"Vision ProMax"
 @onready var weapon = $Weapon
 @onready var health = $Health
+
+
 var player
 var isMoving = false
 var MovementSpeed = 100
@@ -27,7 +28,7 @@ var AStarGrid: AStarGrid2D
 var tile_map
 var watchpoint
 
-var powerUp 
+var powerUps 
 
 func handle_hit():
 	health.health -= 10
@@ -41,7 +42,6 @@ func _ready():
 		FirstSpawn = false
 	
 	player = get_tree().get_first_node_in_group("Player")
-	powerUp = get_tree().get_nodes_in_group("power_ups")
 	SpawnLocation = get_tree().get_nodes_in_group("Enemy Spawns")[Spawner]
 	deadLocation = get_tree().get_nodes_in_group("Respawn Locations")[1]
 	tile_map = get_tree().get_first_node_in_group("Map")
@@ -80,6 +80,7 @@ func _ready():
 				AStarGrid.set_point_solid(tile_position)
 				
 func _process(_delta):
+	powerUps = get_tree().get_nodes_in_group("power_ups")
 	look_at(player.global_position)
 	time_since_last_shot += _delta
 	vision_pro_max.target_position = to_local(player.position)
@@ -109,30 +110,37 @@ func shootBullet(bullet_instance, location, direction):
 	
 func move():
 	var playerData = tile_map.get_cell_tile_data(0, tile_map.local_to_map(player.global_position))
-	var powerData = tile_map.get_cell_tile_data(0, tile_map.local_to_map(powerUp.global_position))
-	var targetLocation : Vector2
-
+	var targetLocation
+	var powerUpLoc
+		
+	if powerUps.is_empty() == false:
+		for power_up in powerUps:
+			var powerData = tile_map.get_cell_tile_data(0, tile_map.local_to_map(power_up.global_position))
+			print("spawned")
+			if power_up.rando == 1 and powerData.get_custom_data("Enemy Base"):
+				print("on power ups")
+				targetLocation = power_up.global_position
+				break
+			else:
+				targetLocation = watchpoint.global_position
+	else:
+		targetLocation = watchpoint.global_position
+				
 	if playerData.get_custom_data("Enemy Base"):
 		targetLocation = player.global_position
-	if playerData.get_custom_data("Walkable"):
-		if powerUp.get_custom_data("Walkable"):
-			if powerUp.rando == 1:
-				targetLocation = powerUp.global_position
-		else:	
-			targetLocation = watchpoint.global_position
 
 	var path = AStarGrid.get_id_path(
 		tile_map.local_to_map(global_position),
 		tile_map.local_to_map(targetLocation)
 	)
-	
+
 	path.pop_front()
-	
+
 	if path.size() == 1 or path.is_empty():
-			return
-			
+		return
+
 	targetPosition = tile_map.map_to_local(path[0])
-			
+
 	isMoving = true
 	
 func _physics_process(_delta):
