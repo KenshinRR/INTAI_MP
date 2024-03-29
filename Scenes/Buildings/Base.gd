@@ -30,7 +30,7 @@ func _ready():
 	
 	#setting up enemy signals
 	enemy.scram.connect(self._on_scram)
-	player.invi.connect(self._invi)
+	enemy.invi.connect(self._invi)
 	
 	#preparing the A* tilemap
 	astar_grid = AStarGrid2D.new()
