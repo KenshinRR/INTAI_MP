@@ -18,6 +18,8 @@ var base_target : Array
 var is_moving = false
 var MovementSpeed = 100
 var target_position = Vector2.ZERO
+var prepTimer
+var roundStart = false
 
 #heath
 @onready var health = $Health
@@ -32,12 +34,6 @@ var SpawnLocation
 #powerup
 signal invi
 
-func handle_hit():
-	health.health -= 10
-	if health.health <= 0:
-		ScoreManager.player_kills += 1
-		isDead = true
-
 func _ready():
 	#setting up the variables
 	if FirstSpawn:
@@ -50,6 +46,7 @@ func _ready():
 	player = get_tree().get_first_node_in_group("Player")
 	tile_map = get_tree().get_first_node_in_group("Map")
 	deadLocation = get_tree().get_nodes_in_group("Respawn Locations")[1]
+	prepTimer = get_tree().get_first_node_in_group("PrepTimer")
 	
 	global_position = SpawnLocation.global_position
 	#shooting
@@ -85,6 +82,7 @@ func _ready():
 			if not tile_data.get_custom_data("Walkable"):
 				astar_grid.set_point_solid(tile_position)
 				
+				
 func _process(_delta):
 	raycast.target_position = to_local(player.global_position)
 	look_at(player.global_position)
@@ -101,8 +99,24 @@ func _process(_delta):
 	
 	if isDead and time_since_died >= respawn_time:
 		handle_respawn()
-	
-	
+
+func _physics_process(delta):
+	if not roundStart:
+		await prepTimer.timeout
+		roundStart = true
+		
+	#movement
+	var direction = target_position - global_position
+	velocity = direction * MovementSpeed * delta
+	move_and_slide()
+	is_moving = false
+	#shooting
+	if !player.isDead:
+		isShooting(delta)
+
+func _on_timer_timeout():
+	pass # Replace with function body.
+
 func move():
 	#deciding where to go
 	var player_tile_data = tile_map.get_cell_tile_data(0, tile_map.local_to_map(player.global_position))
@@ -134,18 +148,11 @@ func move():
 	
 	is_moving = true
 
-func _physics_process(delta):
-	#movement
-	var direction = target_position - global_position
-	velocity = direction * MovementSpeed * delta
-	move_and_slide()
-	is_moving = false
-	#shooting
-	if !player.isDead:
-		isShooting(delta)
-
-func _on_timer_timeout():
-	pass # Replace with function body.
+func _updateGridValues():
+	var power_up_locs = get_tree().get_nodes_in_group("power_ups")
+	
+	
+	pass
 
 func isShooting(_delta):
 	if !raycast.is_colliding():
@@ -161,6 +168,12 @@ func _getAvailableBase():
 	for target in base_target:
 		if !target.is_destroyed:
 			return target
+
+func handle_hit():
+	health.health -= 10
+	if health.health <= 0:
+		ScoreManager.player_kills += 1
+		isDead = true
 
 func handle_respawn():
 	global_position = SpawnLocation.global_position
