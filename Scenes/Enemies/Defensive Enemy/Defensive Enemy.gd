@@ -116,9 +116,7 @@ func move():
 	if powerUps.is_empty() == false:
 		for power_up in powerUps:
 			var powerData = tile_map.get_cell_tile_data(0, tile_map.local_to_map(power_up.global_position))
-			print("spawned")
 			if power_up.rando == 1 and powerData.get_custom_data("Enemy Base"):
-				print("on power ups")
 				targetLocation = power_up.global_position
 				break
 			else:
@@ -136,7 +134,7 @@ func move():
 
 	path.pop_front()
 
-	if path.size() == 1 or path.is_empty():
+	if path.is_empty():
 		return
 
 	targetPosition = tile_map.map_to_local(path[0])
