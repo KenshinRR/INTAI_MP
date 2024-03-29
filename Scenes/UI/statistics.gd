@@ -5,6 +5,7 @@ extends Control
 func _ready():
 	$ColorRect/Respawning.hide()
 	$ColorRect/Reloading.hide()
+	$ColorRect/Invi.hide()
 
 func _setText():
 	#check who's stats it is
@@ -48,3 +49,14 @@ func _on_player_died():
 	$ColorRect/Respawning.show()
 	$RespawnTimer.start()
 	
+
+
+func _on_player_invi():
+	$ColorRect/Invi.show()
+	$InviTimer.start()
+	pass # Replace with function body.
+
+
+func _on_invi_timer_timeout():
+	$ColorRect/Invi.hide()
+	pass # Replace with function body.

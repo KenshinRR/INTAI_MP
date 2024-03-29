@@ -31,14 +31,17 @@ text = "Score: 0"
 
 [node name="Respawning" type="Label" parent="ColorRect"]
 layout_mode = 1
-anchors_preset = 1
+anchors_preset = 6
 anchor_left = 1.0
+anchor_top = 0.5
 anchor_right = 1.0
+anchor_bottom = 0.5
 offset_left = -104.0
-offset_top = 10.0
+offset_top = -11.5
 offset_right = -10.0
-offset_bottom = 33.0
+offset_bottom = 11.5
 grow_horizontal = 0
+grow_vertical = 2
 text = "Respawning"
 
 [node name="Bases" type="Label" parent="ColorRect"]
@@ -76,6 +79,18 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "Reloading"
 
+[node name="Invi" type="Label" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -134.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 33.0
+grow_horizontal = 0
+text = "Invincible Bases"
+
 [node name="RespawnTimer" type="Timer" parent="."]
 wait_time = 5.0
 one_shot = true
@@ -84,5 +99,10 @@ one_shot = true
 wait_time = 0.5
 one_shot = true
 
+[node name="InviTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
 [connection signal="timeout" from="RespawnTimer" to="." method="_on_respawn_timer_timeout"]
 [connection signal="timeout" from="ReloadTimer" to="." method="_on_reload_timer_timeout"]
+[connection signal="timeout" from="InviTimer" to="." method="_on_invi_timer_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://begv0int516qh"]
+[gd_scene load_steps=14 format=3 uid="uid://begv0int516qh"]
 
 [ext_resource type="Texture2D" uid="uid://bnhsf3wai2y8h" path="res://View/Map/Room_Builder_free_16x16.png" id="1_oax6g"]
 [ext_resource type="Texture2D" uid="uid://i8hy6vsdnhld" path="res://View/Map/Interiors_free_16x16.png" id="2_iixnf"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bedx1tiharrag" path="res://Scenes/Enemies/Smart Enemy/smart_enemy.tscn" id="7_3usb7"]
 [ext_resource type="PackedScene" uid="uid://dbjxfippv1hxw" path="res://Scenes/Enemies/Defensive Enemy/Defensive Enemy.tscn" id="7_imtov"]
 [ext_resource type="PackedScene" uid="uid://c0rg6vawt3mcs" path="res://Scenes/UI/statistics.tscn" id="8_pfupf"]
+[ext_resource type="PackedScene" uid="uid://o6j8rd1jc3l1" path="res://Scenes/UI/game_end_screen.tscn" id="9_qsno0"]
 
 [sub_resource type="GDScript" id="GDScript_fmqis"]
 script/source = "extends Node2D
@@ -19,6 +20,7 @@ script/source = "extends Node2D
 @export var power_up_scene: PackedScene
 
 func _ready():
+	$GameEndScreen.hide()
 	$PrepTimer.start()
 	player.bulletShoot.connect(BulletManager.handleBulletSpawn)
 	enemy.bulletShoot.connect(BulletManager.handleBulletSpawn)
@@ -4325,10 +4327,17 @@ offset_right = -139.0
 offset_bottom = -12.0
 scale = Vector2(0.6, 0.6)
 
+[node name="GameEndScreen" parent="." instance=ExtResource("9_qsno0")]
+offset_left = -23.0
+offset_top = -53.0
+offset_right = -23.0
+offset_bottom = -53.0
+
 [connection signal="died" from="Player" to="StatisticsPlayer" method="_on_player_died"]
 [connection signal="invi" from="Player" to="Bases/Player/PlayerBase1" method="_on_player_invi"]
 [connection signal="invi" from="Player" to="Bases/Player/PlayerBase2" method="_on_player_invi"]
 [connection signal="invi" from="Player" to="Bases/Player/PlayerBase3" method="_on_player_invi"]
+[connection signal="invi" from="Player" to="StatisticsPlayer" method="_on_player_invi"]
 [connection signal="reload" from="Player" to="StatisticsPlayer" method="_on_player_reload"]
 [connection signal="scram" from="Player" to="Bases/Player/PlayerBase1" method="_on_player_scram"]
 [connection signal="scram" from="Player" to="Bases/Player/PlayerBase2" method="_on_player_scram"]
