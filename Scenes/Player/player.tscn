@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://View/Map/PowerUps/Health.gd" id="5_hhwlt"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xahvd"]
-radius = 8.0
+radius = 7.0
 
 [sub_resource type="Animation" id="Animation_02blr"]
 length = 0.001
