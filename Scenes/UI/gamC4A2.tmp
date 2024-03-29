@@ -28,7 +28,6 @@ offset_right = 88.5
 offset_bottom = 73.0
 grow_horizontal = 2
 text = "Who Won? Who's Next?"
-horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="Button" type="Button" parent="ColorRect"]

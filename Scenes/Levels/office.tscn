@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://begv0int516qh"]
+[gd_scene load_steps=15 format=3 uid="uid://begv0int516qh"]
 
 [ext_resource type="Texture2D" uid="uid://bnhsf3wai2y8h" path="res://View/Map/Room_Builder_free_16x16.png" id="1_oax6g"]
 [ext_resource type="Texture2D" uid="uid://i8hy6vsdnhld" path="res://View/Map/Interiors_free_16x16.png" id="2_iixnf"]
@@ -9,9 +9,12 @@
 [ext_resource type="PackedScene" uid="uid://dbjxfippv1hxw" path="res://Scenes/Enemies/Defensive Enemy/Defensive Enemy.tscn" id="7_imtov"]
 [ext_resource type="PackedScene" uid="uid://c0rg6vawt3mcs" path="res://Scenes/UI/statistics.tscn" id="8_pfupf"]
 [ext_resource type="PackedScene" uid="uid://o6j8rd1jc3l1" path="res://Scenes/UI/game_end_screen.tscn" id="9_qsno0"]
+[ext_resource type="PackedScene" uid="uid://hhrj5vxbvrlh" path="res://Scenes/UI/timer.tscn" id="10_377c7"]
 
 [sub_resource type="GDScript" id="GDScript_fmqis"]
 script/source = "extends Node2D
+
+
 
 @onready var player = $Player
 @onready var enemy = $\"Enemy/Smart Enemy\"
@@ -49,6 +52,11 @@ func _on_prep_timer_timeout():
 
 func _on_game_end_screen_gone():
 	get_tree().change_scene_to_file(\"res://Scenes/Levels/title_screen.tscn\")
+	pass # Replace with function body.
+
+
+func _on_timer_time_up():
+	$GameEndScreen.show()
 	pass # Replace with function body.
 "
 
@@ -4351,6 +4359,13 @@ offset_top = 10.0
 offset_right = -145.0
 offset_bottom = 10.0
 
+[node name="Timer" parent="." instance=ExtResource("10_377c7")]
+offset_left = -129.0
+offset_top = 272.0
+offset_right = -129.0
+offset_bottom = 272.0
+scale = Vector2(0.8, 0.8)
+
 [connection signal="died" from="Player" to="StatisticsPlayer" method="_on_player_died"]
 [connection signal="invi" from="Player" to="Bases/Player/PlayerBase1" method="_on_player_invi"]
 [connection signal="invi" from="Player" to="Bases/Player/PlayerBase2" method="_on_player_invi"]
@@ -4362,3 +4377,4 @@ offset_bottom = 10.0
 [connection signal="scram" from="Player" to="Bases/Player/PlayerBase3" method="_on_player_scram"]
 [connection signal="timeout" from="PrepTimer" to="." method="_on_prep_timer_timeout"]
 [connection signal="gone" from="GameEndScreen" to="." method="_on_game_end_screen_gone"]
+[connection signal="timeUp" from="Timer" to="." method="_on_timer_time_up"]
