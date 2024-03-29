@@ -58,7 +58,7 @@ func _ready():
 	astar_grid = AStarGrid2D.new()
 	astar_grid.region = tile_map.get_used_rect()
 	astar_grid.cell_size = Vector2(16,16)
-	astar_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_ALWAYS
+	astar_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
 	astar_grid.update()
 	
 	var region_size = astar_grid.region.size
@@ -162,15 +162,18 @@ func _updateGridValues():
 		
 	var power_ups = get_tree().get_nodes_in_group("power_ups")
 	
+	if power_ups.is_empty():
+		return
+	
 	for power_up in power_ups:
 		var locPos = tile_map.local_to_map(power_up.global_position)
-		print("PowerUp at: ", locPos)
+		#print("PowerUp at: ", locPos)
 		match power_up.rando:
 			1:
-				print("Found good one")
+				#print("Found good one")
 				astar_grid.set_point_weight_scale(locPos, 10)
 			_:
-				print("Found non desirable")
+				#print("Found non desirable")
 				astar_grid.set_point_solid(locPos)
 			
 		powerUp_locs.append(locPos)
