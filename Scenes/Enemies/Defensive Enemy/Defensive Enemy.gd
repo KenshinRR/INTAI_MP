@@ -3,6 +3,8 @@ extends CharacterBody2D
 signal bulletShoot(bullet, position, direction)
 signal invi
 
+@onready var timer = $"../../Timer"
+
 @onready var vision_pro_max = $"Vision ProMax"
 @onready var weapon = $Weapon
 @onready var health = $Health
@@ -25,6 +27,8 @@ var AStarGrid: AStarGrid2D
 var tile_map
 var watchpoint
 
+var powerUp 
+
 func handle_hit():
 	health.health -= 10
 	if health.health <= 0:
@@ -36,9 +40,10 @@ func _ready():
 		Spawner = randi_range(0,2)
 		FirstSpawn = false
 	
+	player = get_tree().get_first_node_in_group("Player")
+	powerUp = get_tree().get_nodes_in_group("power_ups")
 	SpawnLocation = get_tree().get_nodes_in_group("Enemy Spawns")[Spawner]
 	deadLocation = get_tree().get_nodes_in_group("Respawn Locations")[1]
-	player = get_tree().get_first_node_in_group("Player")
 	tile_map = get_tree().get_first_node_in_group("Map")
 	watchpoint = get_tree().get_first_node_in_group("Watchpoint")
 	
@@ -98,24 +103,36 @@ func checkPlayerVisible():
 	if vision_pro_max.get_collider() == player and time_since_last_shot >= shootDelay:
 		weapon.shootBullet()
 		time_since_last_shot = 0
-
 		
 func shootBullet(bullet_instance, location, direction):
 	emit_signal("bulletShoot", bullet_instance, location, direction)
 	
 func move():
+	var playerData = tile_map.get_cell_tile_data(0, tile_map.local_to_map(player.global_position))
+	var powerData = tile_map.get_cell_tile_data(0, tile_map.local_to_map(powerUp.global_position))
+	var targetLocation : Vector2
+
+	if playerData.get_custom_data("Enemy Base"):
+		targetLocation = player.global_position
+	if playerData.get_custom_data("Walkable"):
+		if powerUp.get_custom_data("Walkable"):
+			if powerUp.rando == 1:
+				targetLocation = powerUp.global_position
+		else:	
+			targetLocation = watchpoint.global_position
+
 	var path = AStarGrid.get_id_path(
 		tile_map.local_to_map(global_position),
-		tile_map.local_to_map(player.global_position)
+		tile_map.local_to_map(targetLocation)
 	)
 	
 	path.pop_front()
 	
 	if path.size() == 1 or path.is_empty():
-		targetPosition = watchpoint.global_position
-	else:
-		targetPosition = tile_map.map_to_local(path[0])
-	
+			return
+			
+	targetPosition = tile_map.map_to_local(path[0])
+			
 	isMoving = true
 	
 func _physics_process(_delta):
