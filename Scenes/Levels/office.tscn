@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://begv0int516qh"]
+[gd_scene load_steps=14 format=3 uid="uid://begv0int516qh"]
 
 [ext_resource type="Texture2D" uid="uid://bnhsf3wai2y8h" path="res://View/Map/Room_Builder_free_16x16.png" id="1_oax6g"]
 [ext_resource type="Texture2D" uid="uid://i8hy6vsdnhld" path="res://View/Map/Interiors_free_16x16.png" id="2_iixnf"]
@@ -6,8 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://51gkohx2lbt" path="res://Scenes/Player/player.tscn" id="5_3sh5g"]
 [ext_resource type="PackedScene" uid="uid://d08ci8qjjqp21" path="res://Scenes/Buildings/base.tscn" id="5_svojj"]
 [ext_resource type="PackedScene" uid="uid://bedx1tiharrag" path="res://Scenes/Enemies/Smart Enemy/smart_enemy.tscn" id="7_3usb7"]
+[ext_resource type="PackedScene" uid="uid://dbjxfippv1hxw" path="res://Scenes/Enemies/Defensive Enemy/Defensive Enemy.tscn" id="7_imtov"]
 [ext_resource type="PackedScene" uid="uid://c0rg6vawt3mcs" path="res://Scenes/UI/statistics.tscn" id="8_pfupf"]
-[ext_resource type="PackedScene" uid="uid://capsunsyhprhr" path="res://Scenes/UI/timer.tscn" id="10_377c7"]
+[ext_resource type="PackedScene" uid="uid://ppa3nvnpnd80" path="res://Scenes/UI/timer.tscn" id="10_377c7"]
 
 [sub_resource type="GDScript" id="GDScript_fmqis"]
 script/source = "extends Node2D
@@ -25,7 +26,7 @@ func _ready():
 	$PrepTimer.start()
 	player.bulletShoot.connect(BulletManager.handleBulletSpawn)
 	enemy.bulletShoot.connect(BulletManager.handleBulletSpawn)
-	
+	defensive_ai.bulletShoot.connect(BulletManager.handleBulletSpawn)
 	#set up to SEE nodes
 	$Timer.timeUp.connect(end)
 	
@@ -4270,6 +4271,8 @@ position = Vector2(1, 40)
 
 [node name="Watchpoint" type="Marker2D" parent="Enemy" groups=["Watchpoint"]]
 position = Vector2(152, 64)
+
+[node name="Defensive AI" parent="Enemy" instance=ExtResource("7_imtov")]
 
 [node name="PrepTimer" type="Timer" parent="." groups=["PrepTimer"]]
 one_shot = true
