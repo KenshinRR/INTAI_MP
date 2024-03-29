@@ -4,7 +4,7 @@ extends CharacterBody2D
 
 signal bulletShoot(bullet, position, direction)
 signal invi
-signal scram
+signal scram(owner)
 signal reload
 signal died
 
@@ -84,7 +84,7 @@ func shootBullet(bullet_instance, location, direction):
 
 func power_handle(rando):
 	if rando == 0:
-		emit_signal("scram")
+		emit_signal("scram", "Player")
 		print("chaos")
 	if rando == 1:
 		emit_signal("invi")
