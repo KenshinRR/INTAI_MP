@@ -26,9 +26,11 @@ func _ready():
 	
 	#setting up player signals
 	player.scram.connect(self._on_scram)
+	player.invi.connect(self._invi)
 	
 	#setting up enemy signals
 	enemy.scram.connect(self._on_scram)
+	player.invi.connect(self._invi)
 	
 	#preparing the A* tilemap
 	astar_grid = AStarGrid2D.new()
@@ -66,12 +68,17 @@ func _on_invul_timer_timeout():
 	print("Base destroyable")
 	
 	
+func _invi(owner):
+	if(owner == "Player" && self.base_owner== "Player"):
+		$InvulTimer.start()
+		is_destroyable = false;
+		print("Base not destroyable")
+	if(owner == "Enemy" && self.base_owner == "Enemy"):
+		$InvulTimer.start()
+		is_destroyable = false;
+		print("Base not destroyable")
 
-func _on_player_invi():
-	$InvulTimer.start()
-	is_destroyable = false;
-	print("Base not destroyable")
-	pass # Replace with function body.
+
 
 func _on_scram(owner):
 	#if not same owner
