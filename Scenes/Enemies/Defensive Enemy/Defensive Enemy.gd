@@ -14,7 +14,7 @@ var isDead = false
 var time_since_died = 0
 var respawn_time = 5
 var deadLocation
-var FirstSpawn = false
+var FirstSpawn = true
 var Spawner : int
 var SpawnLocation
 
@@ -23,6 +23,7 @@ var time_since_last_shot = 0
 
 var AStarGrid: AStarGrid2D
 var tile_map
+var watchpoint
 
 func handle_hit():
 	health.health -= 10
@@ -36,10 +37,10 @@ func _ready():
 		FirstSpawn = false
 	
 	SpawnLocation = get_tree().get_nodes_in_group("Enemy Spawns")[Spawner]
-	print(get_tree().get_nodes_in_group("Spawn Locations").size())
 	deadLocation = get_tree().get_nodes_in_group("Respawn Locations")[1]
 	player = get_tree().get_first_node_in_group("Player")
 	tile_map = get_tree().get_first_node_in_group("Map")
+	watchpoint = get_tree().get_first_node_in_group("Watchpoint")
 	
 	weapon.weaponFired.connect(self.shootBullet)
 	global_position = SpawnLocation.global_position
@@ -111,9 +112,9 @@ func move():
 	path.pop_front()
 	
 	if path.size() == 1 or path.is_empty():
-		return
-	
-	targetPosition = tile_map.map_to_local(path[0])
+		targetPosition = watchpoint.global_position
+	else:
+		targetPosition = tile_map.map_to_local(path[0])
 	
 	isMoving = true
 	

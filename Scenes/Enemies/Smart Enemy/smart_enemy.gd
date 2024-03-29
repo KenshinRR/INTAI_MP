@@ -25,7 +25,7 @@ var isDead = false
 var time_since_died = 0
 var respawn_time = 5
 var deadLocation
-var FirstSpawn = false
+var FirstSpawn = true
 var Spawner : int
 var SpawnLocation
 
