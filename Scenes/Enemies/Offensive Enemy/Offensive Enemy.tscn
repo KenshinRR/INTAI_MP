@@ -1,8 +1,9 @@
-[gd_scene load_steps=46 format=3 uid="uid://j7dp17bkfslv"]
+[gd_scene load_steps=47 format=3 uid="uid://j7dp17bkfslv"]
 
 [ext_resource type="Script" path="res://Scenes/Enemies/Offensive Enemy/Offensive Enemy.gd" id="1_rj7kc"]
 [ext_resource type="Script" path="res://Scenes/Player/Weapon.gd" id="3_87tdm"]
 [ext_resource type="Texture2D" uid="uid://57gi7s34xmfs" path="res://View/Player/idle/survivor-idle_shotgun_0.png" id="4_gyulp"]
+[ext_resource type="PackedScene" uid="uid://bfkvw3o2633g6" path="res://Scenes/Bullet/bullet.tscn" id="4_t8vp1"]
 [ext_resource type="Script" path="res://View/Map/PowerUps/Health.gd" id="5_8s64t"]
 [ext_resource type="Texture2D" uid="uid://3k5ailahufuf" path="res://View/Player/idle/survivor-idle_shotgun_1.png" id="5_lhnf2"]
 [ext_resource type="Texture2D" uid="uid://26mqfbvvdn7v" path="res://View/Player/idle/survivor-idle_shotgun_2.png" id="6_m3g25"]
@@ -180,7 +181,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="OffensiveEnemy" type="CharacterBody2D"]
+[node name="OffensiveEnemy" type="CharacterBody2D" groups=["enemies"]]
 collision_layer = 2
 collision_mask = 15
 script = ExtResource("1_rj7kc")
@@ -195,6 +196,7 @@ script = ExtResource("5_8s64t")
 
 [node name="Weapon" type="Node2D" parent="."]
 script = ExtResource("3_87tdm")
+Bullet = ExtResource("4_t8vp1")
 
 [node name="GunPoint" type="Marker2D" parent="Weapon"]
 position = Vector2(28, 5)
@@ -203,9 +205,10 @@ position = Vector2(28, 5)
 position = Vector2(30, 5)
 
 [node name="LineOfSight" type="RayCast2D" parent="."]
+collision_mask = 4
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-modulate = Color(0.486275, 1, 0.454902, 1)
+modulate = Color(0.0352941, 1, 0.415686, 1)
 position = Vector2(3, 0)
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_364o3")

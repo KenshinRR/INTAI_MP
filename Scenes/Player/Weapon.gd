@@ -9,5 +9,8 @@ signal weaponFired(bullet, location, distance)
 
 func shootBullet():
 	var bullet_instance = Bullet.instantiate() 
+	if bullet_instance == null:
+		print("cringe")
 	var direction = gunDirec.global_position - gunPoint.global_position
 	emit_signal("weaponFired", bullet_instance, gunPoint.global_position, direction)
+	
