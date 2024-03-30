@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://coyijxmv4imum"]
+[gd_scene load_steps=15 format=3 uid="uid://6ojxim5tkec"]
 
 [ext_resource type="Texture2D" uid="uid://dqdxamv6adjq8" path="res://View/Map/SandLight.png" id="1_df7kb"]
 [ext_resource type="Script" path="res://Scenes/Levels/convergence.gd" id="1_ssloi"]

@@ -1,0 +1,118 @@
+[gd_scene load_steps=2 format=3 uid="uid://bldgkb5y8rfvr"]
+
+[ext_resource type="Script" path="res://Scenes/UI/MapSelector.gd" id="1_i5c02"]
+
+[node name="MapSelector" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_i5c02")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 299.0
+offset_bottom = 354.0
+color = Color(0, 0, 0, 0.729412)
+
+[node name="OponentLabel" type="Label" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -47.5
+offset_top = -97.0
+offset_right = 47.5
+offset_bottom = -74.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Opponent"
+horizontal_alignment = 1
+
+[node name="Mapped" type="OptionButton" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -107.5
+offset_top = -151.0
+offset_right = 112.5
+offset_bottom = -101.0
+grow_horizontal = 2
+grow_vertical = 0
+item_count = 3
+selected = 0
+popup/item_0/text = "Office"
+popup/item_0/id = 0
+popup/item_1/text = "Desert"
+popup/item_1/id = 1
+popup/item_2/text = "Convergence"
+popup/item_2/id = 2
+
+[node name="Game Setup" type="Label" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -47.5
+offset_top = 35.0
+offset_right = 47.5
+offset_bottom = 58.0
+grow_horizontal = 2
+text = "Game Setup"
+
+[node name="MapLabel" type="Label" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -47.5
+offset_top = -7.0
+offset_right = 47.5
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Map"
+horizontal_alignment = 1
+
+[node name="Botted" type="OptionButton" parent="ColorRect"]
+layout_mode = 0
+offset_left = 42.0
+offset_top = 110.0
+offset_right = 262.0
+offset_bottom = 160.0
+item_count = 3
+selected = 0
+popup/item_0/text = "Offensive"
+popup/item_0/id = 0
+popup/item_1/text = "Defensive"
+popup/item_1/id = 1
+popup/item_2/text = "Smart"
+popup/item_2/id = 2
+
+[node name="StartButton" type="Button" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -120.5
+offset_top = -80.0
+offset_right = 120.5
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Start Game"
+
+[connection signal="item_selected" from="ColorRect/Mapped" to="." method="_on_mapped_item_selected"]
+[connection signal="item_selected" from="ColorRect/Botted" to="." method="_on_botted_item_selected"]
+[connection signal="pressed" from="ColorRect/StartButton" to="." method="_on_start_button_pressed"]

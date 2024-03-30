@@ -4,6 +4,8 @@ signal start_game
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$MapSelector.hide()
+	
 	ScoreManager.resetValues()
 	pass # Replace with function body.
 
@@ -14,7 +16,8 @@ func _process(_delta):
 
 
 func _on_button_pressed():
-	get_tree().change_scene_to_file("res://Scenes/Levels/office.tscn")
+	$ColorRect.hide()
+	$MapSelector.show()
 
 
 func _on_quit_pressed():

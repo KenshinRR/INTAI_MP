@@ -1,5 +1,8 @@
 extends Node
 
+var map_index = 0
+var bot_index = 0
+
 var player_score = 0
 var enemy_score = 0
 
