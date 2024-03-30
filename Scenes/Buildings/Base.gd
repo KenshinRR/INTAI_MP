@@ -44,10 +44,16 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
+	if self.has_overlapping_bodies():
+		var overlaps = get_overlapping_bodies()
+		for overlap in overlaps:
+			_on_body_entered(overlap)
+			
 	pass
 
 
 func _on_body_entered(body):
+	
 	if(base_owner == "Enemy" && 
 	body.name == "Player"
 	&& !is_destroyed && is_destroyable):
