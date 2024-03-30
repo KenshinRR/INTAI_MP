@@ -2,10 +2,12 @@ extends Node2D
 
 signal start_game
 
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$MapSelector.hide()
-	
+	$MapSelector.back.connect(title)
 	ScoreManager.resetValues()
 	pass # Replace with function body.
 
@@ -14,6 +16,9 @@ func _ready():
 func _process(_delta):
 	pass
 
+func title():
+	$ColorRect.show()
+	$MapSelector.hide()
 
 func _on_button_pressed():
 	$ColorRect.hide()

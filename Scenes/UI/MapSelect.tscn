@@ -113,6 +113,15 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "Start Game"
 
+[node name="BackButton" type="Button" parent="ColorRect"]
+layout_mode = 1
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 69.0
+offset_bottom = 41.0
+text = "< Back"
+
 [connection signal="item_selected" from="ColorRect/Mapped" to="." method="_on_mapped_item_selected"]
 [connection signal="item_selected" from="ColorRect/Botted" to="." method="_on_botted_item_selected"]
 [connection signal="pressed" from="ColorRect/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="ColorRect/BackButton" to="." method="_on_back_button_pressed"]
