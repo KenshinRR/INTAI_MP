@@ -210,6 +210,7 @@ one_shot = true
 autostart = true
 
 [node name="StatisticsPlayer" parent="." instance=ExtResource("6_jadq1")]
+modulate = Color(0, 0.584314, 1, 1)
 offset_left = -288.0
 offset_top = -32.0
 offset_right = -288.0
