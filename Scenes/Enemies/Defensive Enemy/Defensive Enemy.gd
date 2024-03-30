@@ -123,10 +123,13 @@ func move():
 	if powerUps.is_empty() == false: 	#if there is a power up
 		for power_up in powerUps:
 			var powerData = tile_map.get_cell_tile_data(0, tile_map.local_to_map(power_up.global_position))
+			var locPos = tile_map.local_to_map(power_up.global_position)
 			if power_up.rando == 1 and powerData.get_custom_data("Enemy Base"):
 				#if the power up is the invi power up
 				targetLocation = power_up.global_position
 				break
+			elif power_up.rando != 1:
+				AStarGrid.set_point_solid(locPos)
 
 			targetLocation = watchpoint.global_position
 	else:
