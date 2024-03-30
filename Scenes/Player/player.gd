@@ -114,14 +114,16 @@ func handle_hit():
 	if health.health <= 0:
 		ScoreManager.enemy_kills+= 1
 		isDead = true
+		emit_signal("died","Player")
 
 func handle_respawn():
 	global_position = Penacony.global_position
 	isDead = false
 	health.health = 10
 	time_since_died = 0
+	
 
 func handle_death():
 	global_position = HSS.global_position
-	emit_signal("died","Player")
+	
 	return

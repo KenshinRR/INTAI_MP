@@ -32,6 +32,7 @@ func _setText():
 		$ColorRect/Bases.text = "Bases Left: " + str(3 - ScoreManager.player_score)
 		$ColorRect/Score.text = "Score: " + str(ScoreManager.enemy_kills + ScoreManager.enemy_score)
 	
+		
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -51,11 +52,15 @@ func _reload(owner):
 		
 func _died(owner):
 	if(owner == "Player" && self.name == "StatisticsPlayer"):
-		$ColorRect/Respawning.show()
+
 		$RespawnTimer.start()
+		$ColorRect/Respawning.show()
+		
+		
 	if(owner == "Enemy" && self.name == "StatisticsBot"):
-		$ColorRect/Respawning.show()
 		$RespawnTimer.start()
+		$ColorRect/Respawning.show()
+		
 	
 func _invi(owner):
 	if(owner == "Player" && self.name == "StatisticsPlayer"):
@@ -68,11 +73,12 @@ func _invi(owner):
 func _on_reload_timer_timeout():
 	$ColorRect/Reloading.hide()
 
-
-func _on_respawn_timer_timeout():
-	$ColorRect/Respawning.hide()
-
-
 func _on_invi_timer_timeout():
 	$ColorRect/Invi.hide()
+	pass # Replace with function body.
+
+
+func _on_respawn_timer_timeout():
+	print("it respawn")
+	$ColorRect/Respawning.hide()
 	pass # Replace with function body.
