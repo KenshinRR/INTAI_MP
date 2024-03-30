@@ -7,9 +7,10 @@ extends Node2D
 @onready var bullet_manager = "res://Scenes/Bullet/BulletManager.gd"
 @export var power_up_scene: PackedScene
 var timer
+var enemyList
 
 func _ready():
-	
+	check()
 	$PrepTimer.start()
 	#connecting player to bullet manager
 	player.bulletShoot.connect(BulletManager.handleBulletSpawn)
@@ -23,6 +24,22 @@ func _ready():
 	$Timer.timeUp.connect(end)
 	
 	#defensive_ai.bulletShoot.connect(BulletManager.handleBulletSpawn)
+func check():
+	enemyList = get_tree().get_nodes_in_group("enemies")
+	match ScoreManager.bot_index:
+		0:
+			var enemyScene = preload("res://Scenes/Enemies/Offensive Enemy/Offensive Enemy.tscn")
+			var enemy = enemyScene.instantiate()
+			self.add_child(enemy)
+		1:
+			var enemyScene = preload("res://Scenes/Enemies/Defensive Enemy/Defensive Enemy.tscn")
+			var enemy = enemyScene.instantiate()
+			self.add_child(enemy)
+		2:
+			var enemyScene = preload("res://Scenes/Enemies/Smart Enemy/smart_enemy.tscn")
+			var enemy = enemyScene.instantiate()
+			self.add_child(enemy)
+	
 	
 func _process(delta):
 	if ScoreManager.player_score >= 3:
