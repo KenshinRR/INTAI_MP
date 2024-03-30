@@ -4261,14 +4261,6 @@ zoom = Vector2(2.2, 2.2)
 [node name="Player" parent="." instance=ExtResource("4_ip745")]
 position = Vector2(-8, 96)
 
-[node name="Enemy" type="Node2D" parent="."]
-
-[node name="Smart Enemy" parent="Enemy" instance=ExtResource("5_jaqxi")]
-position = Vector2(-8, -104)
-
-[node name="Watchpoint" type="Marker2D" parent="Enemy" groups=["Watchpoint"]]
-position = Vector2(0, -64)
-
 [node name="Bases" type="Node2D" parent="."]
 
 [node name="Enemy" type="Node2D" parent="Bases"]
@@ -4369,5 +4361,11 @@ offset_bottom = 11.0
 text = "GET READY"
 
 [node name="PowerUpSpawner" parent="." instance=ExtResource("10_1k3bp")]
+
+[node name="Smart Enemy" parent="." instance=ExtResource("5_jaqxi")]
+position = Vector2(-8, -104)
+
+[node name="Watchpoint" type="Marker2D" parent="." groups=["Watchpoint"]]
+position = Vector2(0, -64)
 
 [connection signal="timeout" from="PrepTimer" to="." method="_on_prep_timer_timeout"]
