@@ -210,7 +210,6 @@ one_shot = true
 autostart = true
 
 [node name="StatisticsPlayer" parent="." instance=ExtResource("6_jadq1")]
-visible = false
 offset_left = -288.0
 offset_top = -32.0
 offset_right = -288.0
@@ -218,7 +217,6 @@ offset_bottom = -32.0
 scale = Vector2(0.661856, 0.661856)
 
 [node name="StatisticsBot" parent="." instance=ExtResource("6_jadq1")]
-visible = false
 offset_left = 152.0
 offset_top = -32.0
 offset_right = 152.0
