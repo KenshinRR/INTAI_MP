@@ -1,22 +1,189 @@
-[gd_scene load_steps=6 format=3 uid="uid://j7dp17bkfslv"]
+[gd_scene load_steps=46 format=3 uid="uid://j7dp17bkfslv"]
 
 [ext_resource type="Script" path="res://Scenes/Enemies/Offensive Enemy/Offensive Enemy.gd" id="1_rj7kc"]
-[ext_resource type="Texture2D" uid="uid://che6mvpwrrqut" path="res://Scenes/Player/pewpew.png" id="2_81mfq"]
 [ext_resource type="Script" path="res://Scenes/Player/Weapon.gd" id="3_87tdm"]
+[ext_resource type="Texture2D" uid="uid://57gi7s34xmfs" path="res://View/Player/idle/survivor-idle_shotgun_0.png" id="4_gyulp"]
 [ext_resource type="Script" path="res://View/Map/PowerUps/Health.gd" id="5_8s64t"]
+[ext_resource type="Texture2D" uid="uid://3k5ailahufuf" path="res://View/Player/idle/survivor-idle_shotgun_1.png" id="5_lhnf2"]
+[ext_resource type="Texture2D" uid="uid://26mqfbvvdn7v" path="res://View/Player/idle/survivor-idle_shotgun_2.png" id="6_m3g25"]
+[ext_resource type="Texture2D" uid="uid://eddpicc1urhg" path="res://View/Player/idle/survivor-idle_shotgun_3.png" id="7_e45ol"]
+[ext_resource type="Texture2D" uid="uid://ddua4gd2bcvmb" path="res://View/Player/idle/survivor-idle_shotgun_4.png" id="8_ijwfo"]
+[ext_resource type="Texture2D" uid="uid://b3mj1m13ntwnr" path="res://View/Player/idle/survivor-idle_shotgun_5.png" id="9_tcjbm"]
+[ext_resource type="Texture2D" uid="uid://cshjqf0g7agxv" path="res://View/Player/idle/survivor-idle_shotgun_6.png" id="10_lud2c"]
+[ext_resource type="Texture2D" uid="uid://mpdgkmmnegem" path="res://View/Player/idle/survivor-idle_shotgun_7.png" id="11_niv38"]
+[ext_resource type="Texture2D" uid="uid://b2al2dpi2j40" path="res://View/Player/idle/survivor-idle_shotgun_8.png" id="12_4gvyd"]
+[ext_resource type="Texture2D" uid="uid://r4kgxbnbodls" path="res://View/Player/idle/survivor-idle_shotgun_9.png" id="13_fmjok"]
+[ext_resource type="Texture2D" uid="uid://b6arljd0o2r58" path="res://View/Player/idle/survivor-idle_shotgun_10.png" id="14_5upbs"]
+[ext_resource type="Texture2D" uid="uid://c0nefypljvnmq" path="res://View/Player/idle/survivor-idle_shotgun_11.png" id="15_nolqr"]
+[ext_resource type="Texture2D" uid="uid://7pdjoa0s1y0w" path="res://View/Player/idle/survivor-idle_shotgun_12.png" id="16_fyg6h"]
+[ext_resource type="Texture2D" uid="uid://c2yjhonofv611" path="res://View/Player/idle/survivor-idle_shotgun_13.png" id="17_y4sn1"]
+[ext_resource type="Texture2D" uid="uid://c8rwpqgfxj7ws" path="res://View/Player/idle/survivor-idle_shotgun_14.png" id="18_ayffg"]
+[ext_resource type="Texture2D" uid="uid://v4cdb7oqw6wn" path="res://View/Player/idle/survivor-idle_shotgun_15.png" id="19_arfds"]
+[ext_resource type="Texture2D" uid="uid://djymgpxcrg5xl" path="res://View/Player/idle/survivor-idle_shotgun_16.png" id="20_yq8qj"]
+[ext_resource type="Texture2D" uid="uid://blr5cooooanpi" path="res://View/Player/idle/survivor-idle_shotgun_17.png" id="21_i7gfh"]
+[ext_resource type="Texture2D" uid="uid://bmwdwl3ow5ef2" path="res://View/Player/idle/survivor-idle_shotgun_18.png" id="22_8qgn2"]
+[ext_resource type="Texture2D" uid="uid://ng5ejos7g413" path="res://View/Player/idle/survivor-idle_shotgun_19.png" id="23_uicb6"]
+[ext_resource type="Texture2D" uid="uid://djlkr0jpy1l73" path="res://View/Player/move/survivor-move_shotgun_0.png" id="24_l0jv0"]
+[ext_resource type="Texture2D" uid="uid://c2uxa447thl8h" path="res://View/Player/move/survivor-move_shotgun_1.png" id="25_fi3y6"]
+[ext_resource type="Texture2D" uid="uid://ddflujost6vvc" path="res://View/Player/move/survivor-move_shotgun_2.png" id="26_07gp2"]
+[ext_resource type="Texture2D" uid="uid://vnqc4ccud5pl" path="res://View/Player/move/survivor-move_shotgun_3.png" id="27_gl4ak"]
+[ext_resource type="Texture2D" uid="uid://cjf0lnrrlkrty" path="res://View/Player/move/survivor-move_shotgun_4.png" id="28_6f20b"]
+[ext_resource type="Texture2D" uid="uid://cllloypgkwc73" path="res://View/Player/move/survivor-move_shotgun_5.png" id="29_echa5"]
+[ext_resource type="Texture2D" uid="uid://nrfobxcplqv1" path="res://View/Player/move/survivor-move_shotgun_6.png" id="30_3gcna"]
+[ext_resource type="Texture2D" uid="uid://kjyyqvjpn6vx" path="res://View/Player/move/survivor-move_shotgun_7.png" id="31_lpfdr"]
+[ext_resource type="Texture2D" uid="uid://dxjp8ntemmc8h" path="res://View/Player/move/survivor-move_shotgun_8.png" id="32_q8amq"]
+[ext_resource type="Texture2D" uid="uid://cwjp1o8jgn7qk" path="res://View/Player/move/survivor-move_shotgun_9.png" id="33_7ckks"]
+[ext_resource type="Texture2D" uid="uid://bkmt0o83g4jj7" path="res://View/Player/move/survivor-move_shotgun_10.png" id="34_3pgtg"]
+[ext_resource type="Texture2D" uid="uid://daannisitxbl3" path="res://View/Player/move/survivor-move_shotgun_11.png" id="35_jda1c"]
+[ext_resource type="Texture2D" uid="uid://dtjw57uqrpo02" path="res://View/Player/move/survivor-move_shotgun_12.png" id="36_xtrea"]
+[ext_resource type="Texture2D" uid="uid://bkifdjmd3lk7y" path="res://View/Player/move/survivor-move_shotgun_13.png" id="37_egm6y"]
+[ext_resource type="Texture2D" uid="uid://bdh8hvcdc87jj" path="res://View/Player/move/survivor-move_shotgun_14.png" id="38_a662v"]
+[ext_resource type="Texture2D" uid="uid://ctc3yiv7edckb" path="res://View/Player/move/survivor-move_shotgun_15.png" id="39_47c30"]
+[ext_resource type="Texture2D" uid="uid://jkx7s1qjgff7" path="res://View/Player/move/survivor-move_shotgun_16.png" id="40_snvr8"]
+[ext_resource type="Texture2D" uid="uid://ehppa88eq6yk" path="res://View/Player/move/survivor-move_shotgun_17.png" id="41_3icya"]
+[ext_resource type="Texture2D" uid="uid://bhi1gnx4u3v0b" path="res://View/Player/move/survivor-move_shotgun_18.png" id="42_da8br"]
+[ext_resource type="Texture2D" uid="uid://cjoj82jsra10u" path="res://View/Player/move/survivor-move_shotgun_19.png" id="43_bk6cf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_orctr"]
 radius = 62.5
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_364o3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_gyulp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_lhnf2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_m3g25")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_e45ol")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ijwfo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_tcjbm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_lud2c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_niv38")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4gvyd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_fmjok")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_5upbs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_nolqr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_fyg6h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_y4sn1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_ayffg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_arfds")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_yq8qj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_i7gfh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_8qgn2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_uicb6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("24_l0jv0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_fi3y6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_07gp2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_gl4ak")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_6f20b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_echa5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_3gcna")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_lpfdr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_q8amq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_7ckks")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_3pgtg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_jda1c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_xtrea")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_egm6y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_a662v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_47c30")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_snvr8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_3icya")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_da8br")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_bk6cf")
+}],
+"loop": true,
+"name": &"walking",
+"speed": 5.0
+}]
 
 [node name="OffensiveEnemy" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 15
 script = ExtResource("1_rj7kc")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0, 1, 0.533333, 1)
-scale = Vector2(0.128, 0.133)
-texture = ExtResource("2_81mfq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-2, 0)
@@ -30,9 +197,16 @@ script = ExtResource("5_8s64t")
 script = ExtResource("3_87tdm")
 
 [node name="GunPoint" type="Marker2D" parent="Weapon"]
-position = Vector2(23, -3)
+position = Vector2(28, 5)
 
 [node name="GunDirection" type="Marker2D" parent="Weapon"]
-position = Vector2(25, -3)
+position = Vector2(30, 5)
 
 [node name="LineOfSight" type="RayCast2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(0.486275, 1, 0.454902, 1)
+position = Vector2(3, 0)
+scale = Vector2(0.1, 0.1)
+sprite_frames = SubResource("SpriteFrames_364o3")
+animation = &"walking"

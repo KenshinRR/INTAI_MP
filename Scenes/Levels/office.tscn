@@ -17,17 +17,22 @@ script/source = "extends Node2D
 
 
 @onready var player = $Player
-@onready var enemy = $\"Enemy/Smart Enemy\"
-@onready var defensive_ai = $\"Enemy/Defensive AI\"
+
 @onready var bullet_manager = \"res://Scenes/Bullet/BulletManager.gd\"
 @export var power_up_scene: PackedScene
 var timer
+
 func _ready():
 	
 	$PrepTimer.start()
+	#connecting player to bullet manager
 	player.bulletShoot.connect(BulletManager.handleBulletSpawn)
-	enemy.bulletShoot.connect(BulletManager.handleBulletSpawn)
-	defensive_ai.bulletShoot.connect(BulletManager.handleBulletSpawn)
+	
+	#connecting enemies to bullet manager
+	var enemies = get_tree().get_nodes_in_group(\"enemies\")
+	for enemy in enemies:
+		enemy.bulletShoot.connect(BulletManager.handleBulletSpawn)
+	
 	#set up to SEE nodes
 	$Timer.timeUp.connect(end)
 	

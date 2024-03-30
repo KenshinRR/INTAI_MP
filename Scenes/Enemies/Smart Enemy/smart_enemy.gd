@@ -21,6 +21,7 @@ var target_position = Vector2.ZERO
 var prepTimer
 var roundStart = false
 var powerUp_locs : Array
+@onready var animatedSprite = $AnimatedSprite2D
 
 #heath
 @onready var health = $Health
@@ -110,6 +111,12 @@ func _physics_process(delta):
 	#movement
 	var direction = target_position - global_position
 	velocity = direction * MovementSpeed * delta
+	
+	if MovementSpeed == 0:
+		animatedSprite.play("default")
+	else:
+		animatedSprite.play("walking")
+	
 	move_and_slide()
 	is_moving = false
 	#shooting

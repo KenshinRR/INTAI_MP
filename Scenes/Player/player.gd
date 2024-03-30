@@ -22,10 +22,14 @@ var Spawner : int
 var HSS
 var Penacony 
 var watchpoint
+var prepTimer
+var roundStart = false
 
 @onready var weapon = $Weapon
 @onready var power = preload("res://Scenes/Power Ups/power_up.tscn")
 var pwn
+
+@onready var animationSprite = $AnimatedSprite2D
 
 func _ready(): #sets the initial direction the sprite is facing
 	#_updateDirection(startDirection)
@@ -35,6 +39,7 @@ func _ready(): #sets the initial direction the sprite is facing
 	
 	Penacony = get_tree().get_nodes_in_group("Player Spawns")[Spawner]
 	HSS = get_tree().get_nodes_in_group("Respawn Locations")[0]
+	prepTimer = get_tree().get_first_node_in_group("PrepTimer")
 	weapon.weaponFired.connect(self.shootBullet)
 	#pwn = power.instantiate()
 	#add_child(pwn)
@@ -43,10 +48,20 @@ func _ready(): #sets the initial direction the sprite is facing
 	global_position = Penacony.global_position
 
 func _physics_process(_delta): #handles movement
+	#dont move during round start
+	if not roundStart:
+		await prepTimer.timeout
+		roundStart = true
+		
+	#moving
 	var direction = Vector2(Input.get_action_strength("Move_Right") - Input.get_action_strength("Move_Left"),
 	 		Input.get_action_strength("Move_Down") - Input.get_action_strength("Move_Up")).normalized()
 	
 	velocity = (direction * MovementSpeed)	
+	if MovementSpeed != 0:
+		animationSprite.play("walking")
+	else:
+		animationSprite.play("default")
 	
 	move_and_slide()
 	
