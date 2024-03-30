@@ -288,4 +288,4 @@ position = Vector2(28, 5)
 script = ExtResource("5_yb64o")
 
 [node name="Vision ProMax" type="RayCast2D" parent="."]
-collision_mask = 5
+collision_mask = 7

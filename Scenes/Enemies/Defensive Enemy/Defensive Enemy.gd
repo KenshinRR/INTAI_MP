@@ -8,6 +8,7 @@ signal invi(owner)
 @onready var weapon = $Weapon
 @onready var health = $Health
 
+var Enemies
 
 var player
 var isMoving = false
@@ -51,6 +52,7 @@ func _ready():
 	tile_map = get_tree().get_first_node_in_group("Map")
 	watchpoint = get_tree().get_first_node_in_group("Watchpoint")
 	prepTimer = get_tree().get_first_node_in_group("PrepTimer")
+	Enemies = get_tree().get_nodes_in_group("enemies")
 	
 	weapon.weaponFired.connect(self.shootBullet)
 	global_position = SpawnLocation.global_position
@@ -119,35 +121,53 @@ func move():
 	var playerData = tile_map.get_cell_tile_data(0, tile_map.local_to_map(player.global_position))
 	var targetLocation
 	var powerUpLoc
+	var enemyOnTile = []
+	var badOnTile = []
+	
+	for enemy in Enemies:
+		if enemy == self:
+			continue
 		
-	if powerUps.is_empty() == false: 	#if there is a power up
-		for power_up in powerUps:
-			var powerData = tile_map.get_cell_tile_data(0, tile_map.local_to_map(power_up.global_position))
-			var locPos = tile_map.local_to_map(power_up.global_position)
-			if power_up.rando == 1 and powerData.get_custom_data("Enemy Base"):
-				#if the power up is the invi power up
-				targetLocation = power_up.global_position
-				break
-			elif power_up.rando != 1:
-				AStarGrid.set_point_solid(locPos)
-
-			targetLocation = watchpoint.global_position
-	else:
-		#go to watch point if there are no current power up
-		targetLocation = watchpoint.global_position
-				
+		enemyOnTile.append(tile_map.local_to_map(enemy.global_position))
+		
 	if playerData.get_custom_data("Enemy Base"):
 		#go to player position if player entered the enemy base
 		targetLocation = player.global_position
+	else:	
+		if powerUps.is_empty() == false: 	#if there is a power up
+			for power_up in powerUps:
+				var powerData = tile_map.get_cell_tile_data(0, tile_map.local_to_map(power_up.global_position))
+				var locPos = tile_map.local_to_map(power_up.global_position)
+				if power_up.rando == 1 and powerData.get_custom_data("Enemy Base"):
+					#if the power up is the invi power up
+					targetLocation = power_up.global_position
+					continue
+				elif power_up.rando != 1:
+					badOnTile.append(tile_map.local_to_map(power_up.global_position))
 
+				targetLocation = watchpoint.global_position
+		else:
+			#go to watch point if there are no current power up
+			targetLocation = watchpoint.global_position
+	for tileOccupied in enemyOnTile:
+		AStarGrid.set_point_solid(tileOccupied)		
+			
+	for tileOccupied in badOnTile:
+		AStarGrid.set_point_solid(tileOccupied)			
+		
 	#setting the path
 	var path = AStarGrid.get_id_path(
 		tile_map.local_to_map(global_position),
 		tile_map.local_to_map(targetLocation)
 	)
-
+	
+	for tileOccupied in enemyOnTile:
+		AStarGrid.set_point_solid(tileOccupied, false)
+		
+	for tileOccupied in badOnTile:
+		AStarGrid.set_point_solid(tileOccupied, false)				
 	path.pop_front()
-
+	
 	if path.is_empty():
 		return
 	
