@@ -71,6 +71,12 @@ func _on_timer_timeout():
 		if isOnBase(player_bases, enemy_bases, generated_pos):
 			valid = false
 			continue
+			
+		#check if generated is on either player or enemy
+		if isOnEntity(generated_pos):
+			valid = false
+			continue
+			
 		valid = true
 		
 	power_up.global_position = tile_map.map_to_local(generated_pos)
@@ -86,4 +92,18 @@ func isOnBase(player_bases, enemy_bases, currentPos):
 	for base in enemy_bases:
 		if Vector2i(currentPos) == tile_map.local_to_map(base.global_position):
 			valid = true
+	return valid
+
+func isOnEntity(currentPos):
+	var player = get_tree().get_first_node_in_group("Player")
+	var enemies = get_tree().get_nodes_in_group("enemies")
+	var valid = false
+	
+	if player.global_position == currentPos:
+		valid = true
+	
+	for enemy in enemies:
+		if enemy.global_position == currentPos:
+			valid = true
+	
 	return valid
