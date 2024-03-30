@@ -178,6 +178,7 @@ func handle_death():
 
 func power_handle(rando):
 	if rando == 0:
+		emit_signal("scram", "Enemy")	
 		print("chaos")
 	if rando == 1:
 		emit_signal("invi", "Enemy")	
