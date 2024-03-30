@@ -1,7 +1,7 @@
 extends Control
 
 var player
-var enemy
+var enemyList
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -10,11 +10,12 @@ func _ready():
 	$ColorRect/Invi.hide()
 	
 	player = get_tree().get_first_node_in_group("Player")
-	enemy = get_tree().get_first_node_in_group("enemies")
+	enemyList = get_tree().get_nodes_in_group("enemies")
 	player.died.connect(_died)
 	player.reload.connect(_reload)
 	player.invi.connect(_invi)
-	enemy.invi.connect(_invi)
+	for enemy in enemyList:
+		enemy.invi.connect(_invi)
 
 func _setText():
 	#check who's stats it is

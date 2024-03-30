@@ -9,7 +9,7 @@ var tile_map
 var astar_grid
 
 var player
-var enemy
+var enemyList
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -22,15 +22,16 @@ func _ready():
 	#setting up the variables
 	tile_map = get_tree().get_first_node_in_group("Map")
 	player = get_tree().get_first_node_in_group("Player")
-	enemy = get_tree().get_first_node_in_group("enemies")
+	enemyList = get_tree().get_nodes_in_group("enemies")
 	
 	#setting up player signals
 	player.scram.connect(self._on_scram)
 	player.invi.connect(self._invi)
 	
 	#setting up enemy signals
-	enemy.scram.connect(self._on_scram)
-	enemy.invi.connect(self._invi)
+	for enemy in enemyList:
+		enemy.scram.connect(self._on_scram)
+		enemy.invi.connect(self._invi)
 	
 	#preparing the A* tilemap
 	astar_grid = AStarGrid2D.new()
