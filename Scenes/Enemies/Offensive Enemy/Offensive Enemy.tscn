@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://j7dp17bkfslv"]
+
+[ext_resource type="Script" path="res://Scenes/Enemies/Offensive Enemy/Offensive Enemy.gd" id="1_rj7kc"]
+[ext_resource type="Texture2D" uid="uid://che6mvpwrrqut" path="res://Scenes/Player/pewpew.png" id="2_81mfq"]
+[ext_resource type="Script" path="res://Scenes/Player/Weapon.gd" id="3_87tdm"]
+[ext_resource type="Script" path="res://View/Map/PowerUps/Health.gd" id="5_8s64t"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_orctr"]
+radius = 62.5
+
+[node name="OffensiveEnemy" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 15
+script = ExtResource("1_rj7kc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 1, 0.533333, 1)
+scale = Vector2(0.128, 0.133)
+texture = ExtResource("2_81mfq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 0)
+scale = Vector2(0.128, 0.128)
+shape = SubResource("CircleShape2D_orctr")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("5_8s64t")
+
+[node name="Weapon" type="Node2D" parent="."]
+script = ExtResource("3_87tdm")
+
+[node name="GunPoint" type="Marker2D" parent="Weapon"]
+position = Vector2(23, -3)
+
+[node name="GunDirection" type="Marker2D" parent="Weapon"]
+position = Vector2(25, -3)
+
+[node name="LineOfSight" type="RayCast2D" parent="."]

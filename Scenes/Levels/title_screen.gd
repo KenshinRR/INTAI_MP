@@ -14,8 +14,11 @@ func _process(_delta):
 
 
 func _on_button_pressed():
-	$ColorRect.hide()
-	$Message.hide()
-	$Button.hide()
+	
 	
 	get_tree().change_scene_to_file("res://Scenes/Levels/office.tscn")
+
+
+func _on_quit_pressed():
+	get_tree().quit()
+	pass # Replace with function body.

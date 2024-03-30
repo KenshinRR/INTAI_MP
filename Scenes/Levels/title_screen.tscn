@@ -1389,6 +1389,28 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.729412)
 
+[node name="Button" type="Button" parent="ColorRect"]
+offset_left = 90.0
+offset_top = 210.0
+offset_right = 211.0
+offset_bottom = 249.0
+text = "START"
+
+[node name="Quit" type="Button" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -58.5
+offset_top = -94.0
+offset_right = 60.5
+offset_bottom = -57.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "QUIT GAME"
+
 [node name="Message" type="Label" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
@@ -1403,11 +1425,5 @@ text = "TIME TO TIME OUT"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="Button" type="Button" parent="."]
-offset_left = -66.0
-offset_top = 66.0
-offset_right = 55.0
-offset_bottom = 105.0
-text = "START"
-
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="ColorRect/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="ColorRect/Quit" to="." method="_on_quit_pressed"]
