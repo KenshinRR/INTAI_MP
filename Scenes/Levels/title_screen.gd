@@ -6,6 +6,7 @@ signal start_game
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	get_tree().call_group("enemies", "queue_free")
 	$MapSelector.hide()
 	$MapSelector.back.connect(title)
 	ScoreManager.resetValues()
