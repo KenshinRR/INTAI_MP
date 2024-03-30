@@ -14,8 +14,6 @@
 [sub_resource type="GDScript" id="GDScript_fmqis"]
 script/source = "extends Node2D
 
-
-
 @onready var player = $Player
 
 @onready var bullet_manager = \"res://Scenes/Bullet/BulletManager.gd\"
@@ -23,7 +21,7 @@ script/source = "extends Node2D
 var timer
 
 func _ready():
-	
+	print(\"START OF NEW ROUND\")
 	$PrepTimer.start()
 	#connecting player to bullet manager
 	player.bulletShoot.connect(BulletManager.handleBulletSpawn)
@@ -33,7 +31,6 @@ func _ready():
 	for enemy in enemies:
 		enemy.bulletShoot.connect(BulletManager.handleBulletSpawn)
 		
-	
 	#set up to SEE nodes
 	$Timer.timeUp.connect(end)
 	
