@@ -45,7 +45,7 @@ func _on_timer_timeout():
 	var valid = false
 	var region_size = astar_grid.region.size
 	var generated_pos = Vector2(0,0)
-	
+		
 	#getting already spawned power ups
 	var player_bases = get_tree().get_nodes_in_group("Player Bases")
 	var enemy_bases = get_tree().get_nodes_in_group("Enemy Bases")
