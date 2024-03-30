@@ -33,6 +33,7 @@ wait_time = 0.2
 autostart = true
 
 [node name="Trail" type="Line2D" parent="."]
+visible = false
 width_curve = SubResource("Curve_s3m6o")
 default_color = Color(1, 0.870588, 0, 1)
 script = ExtResource("3_dngta")
