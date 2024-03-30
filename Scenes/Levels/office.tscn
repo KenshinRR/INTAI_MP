@@ -1,13 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://begv0int516qh"]
+[gd_scene load_steps=12 format=3 uid="uid://begv0int516qh"]
 
 [ext_resource type="Texture2D" uid="uid://bnhsf3wai2y8h" path="res://View/Map/Room_Builder_free_16x16.png" id="1_oax6g"]
 [ext_resource type="Texture2D" uid="uid://i8hy6vsdnhld" path="res://View/Map/Interiors_free_16x16.png" id="2_iixnf"]
 [ext_resource type="PackedScene" uid="uid://bk1m1ungvuxh" path="res://Scenes/Buildings/power_up_spawner.tscn" id="4_uxkcd"]
 [ext_resource type="PackedScene" uid="uid://51gkohx2lbt" path="res://Scenes/Player/player.tscn" id="5_3sh5g"]
 [ext_resource type="PackedScene" uid="uid://d08ci8qjjqp21" path="res://Scenes/Buildings/base.tscn" id="5_svojj"]
-[ext_resource type="PackedScene" uid="uid://bedx1tiharrag" path="res://Scenes/Enemies/Smart Enemy/smart_enemy.tscn" id="7_3usb7"]
-[ext_resource type="PackedScene" uid="uid://dbjxfippv1hxw" path="res://Scenes/Enemies/Defensive Enemy/Defensive Enemy.tscn" id="7_imtov"]
-[ext_resource type="PackedScene" uid="uid://j7dp17bkfslv" path="res://Scenes/Enemies/Offensive Enemy/Offensive Enemy.tscn" id="8_3mg6x"]
 [ext_resource type="PackedScene" uid="uid://c0rg6vawt3mcs" path="res://Scenes/UI/statistics.tscn" id="8_pfupf"]
 [ext_resource type="PackedScene" uid="uid://capsunsyhprhr" path="res://Scenes/UI/timer.tscn" id="10_377c7"]
 
@@ -4268,18 +4265,6 @@ zoom = Vector2(2.2, 2.2)
 [node name="Player" parent="." instance=ExtResource("5_3sh5g")]
 position = Vector2(245, 216)
 
-[node name="Enemy" type="Node2D" parent="."]
-
-[node name="Smart Enemy" parent="Enemy" instance=ExtResource("7_3usb7")]
-position = Vector2(1, 40)
-
-[node name="Watchpoint" type="Marker2D" parent="Enemy" groups=["Watchpoint"]]
-position = Vector2(152, 64)
-
-[node name="Defensive AI" parent="Enemy" instance=ExtResource("7_imtov")]
-
-[node name="OffensiveEnemy" parent="Enemy" instance=ExtResource("8_3mg6x")]
-
 [node name="PrepTimer" type="Timer" parent="." groups=["PrepTimer"]]
 one_shot = true
 
@@ -4356,6 +4341,9 @@ offset_top = 272.0
 offset_right = -129.0
 offset_bottom = 272.0
 scale = Vector2(0.8, 0.8)
+
+[node name="Watchpoint" type="Marker2D" parent="." groups=["Watchpoint"]]
+position = Vector2(152, 64)
 
 [connection signal="died" from="Player" to="StatisticsPlayer" method="_on_player_died"]
 [connection signal="invi" from="Player" to="Bases/Player/PlayerBase1" method="_on_player_invi"]

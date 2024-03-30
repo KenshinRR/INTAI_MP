@@ -1,9 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://cvpc78bsnf2xu"]
+[gd_scene load_steps=10 format=3 uid="uid://cvpc78bsnf2xu"]
 
 [ext_resource type="Texture2D" uid="uid://dqdxamv6adjq8" path="res://View/Map/SandLight.png" id="1_7uxvo"]
 [ext_resource type="Script" path="res://Scenes/Levels/desert.gd" id="1_28qam"]
 [ext_resource type="PackedScene" uid="uid://51gkohx2lbt" path="res://Scenes/Player/player.tscn" id="2_45skv"]
-[ext_resource type="PackedScene" uid="uid://bedx1tiharrag" path="res://Scenes/Enemies/Smart Enemy/smart_enemy.tscn" id="3_oohhb"]
 [ext_resource type="PackedScene" uid="uid://d08ci8qjjqp21" path="res://Scenes/Buildings/base.tscn" id="5_esw53"]
 [ext_resource type="PackedScene" uid="uid://c0rg6vawt3mcs" path="res://Scenes/UI/statistics.tscn" id="6_jadq1"]
 [ext_resource type="PackedScene" uid="uid://capsunsyhprhr" path="res://Scenes/UI/timer.tscn" id="7_3b6vj"]
@@ -133,9 +132,6 @@ layer_2/tile_data = PackedInt32Array()
 
 [node name="Player" parent="." instance=ExtResource("2_45skv")]
 position = Vector2(-200, 0)
-
-[node name="Smart Enemy" parent="." instance=ExtResource("3_oohhb")]
-position = Vector2(208, 0)
 
 [node name="Watchpoint" type="Marker2D" parent="." groups=["Watchpoint"]]
 position = Vector2(72, 0)
