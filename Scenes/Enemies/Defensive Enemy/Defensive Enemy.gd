@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 signal bulletShoot(bullet, position, direction)
 signal scram(owner)
-signal invi
+signal invi(owner)
 
 @onready var vision_pro_max = $"Vision ProMax"
 @onready var weapon = $Weapon
@@ -30,6 +30,10 @@ var watchpoint
 
 var powerUps 
 
+#wait for round start
+var prepTimer
+var roundStart = false
+
 func handle_hit():
 	health.health -= 10
 	if health.health <= 0:
@@ -46,6 +50,7 @@ func _ready():
 	deadLocation = get_tree().get_nodes_in_group("Respawn Locations")[1]
 	tile_map = get_tree().get_first_node_in_group("Map")
 	watchpoint = get_tree().get_first_node_in_group("Watchpoint")
+	prepTimer = get_tree().get_first_node_in_group("PrepTimer")
 	
 	weapon.weaponFired.connect(self.shootBullet)
 	global_position = SpawnLocation.global_position
@@ -149,6 +154,9 @@ func move():
 	isMoving = true
 	
 func _physics_process(_delta):
+	if not roundStart:
+		await prepTimer.timeout
+		roundStart = true
 	if isMoving:
 		var direction = targetPosition - global_position
 		velocity = (direction * MovementSpeed) * _delta
@@ -172,7 +180,7 @@ func power_handle(rando):
 	if rando == 0:
 		print("chaos")
 	if rando == 1:
-		emit_signal("invi")	
+		emit_signal("invi", "Enemy")	
 	if rando == 2:
 		health.health = 0
 		isDead = true

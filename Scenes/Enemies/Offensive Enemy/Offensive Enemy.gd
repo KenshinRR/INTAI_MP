@@ -33,7 +33,7 @@ var Spawner : int
 var SpawnLocation
 
 #powerup
-signal invi
+signal invi(owner)
 signal scram(owner)
 
 func _ready():
@@ -235,7 +235,7 @@ func power_handle(rando):
 		emit_signal("scram", "Enemy")
 		print("chaos")
 	if rando == 1:
-		emit_signal("invi")
+		emit_signal("invi", "Enemy")
 	
 	if rando == 2:
 		health.health = 0
