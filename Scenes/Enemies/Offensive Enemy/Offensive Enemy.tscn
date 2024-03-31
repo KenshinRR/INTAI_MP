@@ -46,7 +46,7 @@
 [ext_resource type="Texture2D" uid="uid://cjoj82jsra10u" path="res://View/Player/move/survivor-move_shotgun_19.png" id="43_bk6cf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_orctr"]
-radius = 62.5
+radius = 54.6875
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_364o3"]
 animations = [{

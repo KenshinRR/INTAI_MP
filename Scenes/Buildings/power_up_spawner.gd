@@ -15,7 +15,7 @@ var is_spawned = false
 func _ready():
 	#setting up the variables
 	tile_map = get_tree().get_first_node_in_group("Map")
-	#timer.wait_time = randi_range(15,20)
+	timer.wait_time = randi_range(15,20)
 	
 	#preparing the A* tilemap
 	astar_grid = AStarGrid2D.new()
@@ -30,7 +30,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if is_spawned:
-		#timer.wait_time = randi_range(15,20)
+		timer.wait_time = randi_range(15,20)
 		is_spawned = false
 	pass
 

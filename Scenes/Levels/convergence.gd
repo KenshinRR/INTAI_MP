@@ -39,6 +39,18 @@ func check():
 			var enemyScene = preload("res://Scenes/Enemies/Smart Enemy/smart_enemy.tscn")
 			var enemy = enemyScene.instantiate()
 			self.add_child(enemy)
+		3:
+			var enemyScene = preload("res://Scenes/Enemies/Offensive Enemy/Offensive Enemy.tscn")
+			var enemy = enemyScene.instantiate()
+			self.add_child(enemy)
+		
+			enemyScene = preload("res://Scenes/Enemies/Defensive Enemy/Defensive Enemy.tscn")
+			enemy = enemyScene.instantiate()
+			self.add_child(enemy)
+		
+			enemyScene = preload("res://Scenes/Enemies/Smart Enemy/smart_enemy.tscn")
+			enemy = enemyScene.instantiate()
+			self.add_child(enemy)
 	
 	
 func _process(delta):
