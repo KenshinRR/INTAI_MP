@@ -153,6 +153,7 @@ func move():
 func _updateGridValues():
 		
 	var power_ups = get_tree().get_nodes_in_group("power_ups")
+	var enemies = get_tree().get_nodes_in_group("enemies")
 	
 	if power_ups.is_empty():
 		return
@@ -168,6 +169,13 @@ func _updateGridValues():
 				#print("Found non desirable")
 				astar_grid.set_point_solid(locPos)
 			
+		powerUp_locs.append(locPos)
+		
+	for enemy in enemies:
+		var locPos = tile_map.local_to_map(enemy.global_position)
+		if locPos > astar_grid.size or locPos < Vector2i(0,0):
+			continue
+		astar_grid.set_point_solid(locPos)
 		powerUp_locs.append(locPos)
 	
 	pass
