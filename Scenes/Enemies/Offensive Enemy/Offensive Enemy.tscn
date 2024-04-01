@@ -45,9 +45,6 @@
 [ext_resource type="Texture2D" uid="uid://bhi1gnx4u3v0b" path="res://View/Player/move/survivor-move_shotgun_18.png" id="42_da8br"]
 [ext_resource type="Texture2D" uid="uid://cjoj82jsra10u" path="res://View/Player/move/survivor-move_shotgun_19.png" id="43_bk6cf"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_orctr"]
-radius = 54.6875
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_364o3"]
 animations = [{
 "frames": [{
@@ -181,13 +178,22 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_orctr"]
+radius = 54.6875
+
 [node name="OffensiveEnemy" type="CharacterBody2D" groups=["enemies"]]
 collision_layer = 2
 collision_mask = 15
 script = ExtResource("1_rj7kc")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(0.0352941, 1, 0.415686, 1)
+position = Vector2(6, 0)
+scale = Vector2(0.1, 0.1)
+sprite_frames = SubResource("SpriteFrames_364o3")
+animation = &"walking"
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-2, 0)
 scale = Vector2(0.128, 0.128)
 shape = SubResource("CircleShape2D_orctr")
 
@@ -206,10 +212,3 @@ position = Vector2(30, 5)
 
 [node name="LineOfSight" type="RayCast2D" parent="."]
 collision_mask = 4
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-modulate = Color(0.0352941, 1, 0.415686, 1)
-position = Vector2(3, 0)
-scale = Vector2(0.1, 0.1)
-sprite_frames = SubResource("SpriteFrames_364o3")
-animation = &"walking"

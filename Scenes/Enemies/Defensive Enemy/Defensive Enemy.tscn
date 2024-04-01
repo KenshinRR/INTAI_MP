@@ -179,7 +179,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ahqvp"]
-radius = 8.0
+radius = 7.0
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ahg6b"]
 animation = &"walking down"

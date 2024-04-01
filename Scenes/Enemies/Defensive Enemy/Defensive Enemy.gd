@@ -150,6 +150,8 @@ func move():
 			#go to watch point if there are no current power up
 			targetLocation = watchpoint.global_position
 	for tileOccupied in enemyOnTile:
+		if tileOccupied > AStarGrid.size or tileOccupied < Vector2i(0,0):
+			continue
 		AStarGrid.set_point_solid(tileOccupied)		
 			
 	for tileOccupied in badOnTile:
@@ -162,6 +164,8 @@ func move():
 	)
 	
 	for tileOccupied in enemyOnTile:
+		if tileOccupied > AStarGrid.size or tileOccupied < Vector2i(0,0):
+			continue
 		AStarGrid.set_point_solid(tileOccupied, false)
 		
 	for tileOccupied in badOnTile:
