@@ -131,6 +131,8 @@ func move():
 	
 	if _getAvailableBase() != null:
 		target = _getAvailableBase().global_position
+	if target == null:
+		return
 		
 	#getting path
 	var path = astar_grid.get_id_path(
